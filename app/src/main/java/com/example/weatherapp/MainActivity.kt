@@ -8,21 +8,23 @@ import android.os.Bundle
 //Imported for date
 import android.widget.TextView
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    //Date variable
-    lateinit var textView: TextView
-    lateinit var date: String
-    lateinit var simpleDateFormat : SimpleDateFormat
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textView = findViewById(R.id.date_ID)
+        val textView: TextView = findViewById(R.id.date_ID)
+        val calendar: Calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+        val dateTime = simpleDateFormat.format(calendar.time)
+        textView.text = dateTime
 
     }
 
