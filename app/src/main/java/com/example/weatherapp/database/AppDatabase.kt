@@ -5,15 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-/**
- * Created by grzegorzbaczek on 10/03/2018.
- */
-@Database(entities = [Weather::class], version = 1, exportSchema = false)
+
+@Database(entities = [Weather::class, Forecast::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun weatherDao(): WeatherDao
+    abstract fun forecastDao(): ForecastDao
 
     companion object {
-        // Singleton to prevent multiple instances from existing
+        // Singleton to prevent multiple instances from existing instance
         private var INSTANCE: AppDatabase? = null
 
         fun getAppDatabase(context: Context): AppDatabase? {

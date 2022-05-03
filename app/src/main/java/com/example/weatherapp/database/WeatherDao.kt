@@ -1,17 +1,14 @@
 package com.example.weatherapp.database
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface WeatherDao {
 
-    @Query("SELECT * FROM weather where cityId = '%'")
-    fun getWeatherByCityId(cityId : Number): Weather?
+    @Query("SELECT * FROM weather where stationId = :stationId")
+    fun getWeatherByStationId(stationId : Int): Weather?
 
-    @Query("SELECT * FROM weather where cityName = '%'")
+    @Query("SELECT * FROM weather where cityName = :cityName")
     fun getWeatherByCityName(cityName : String): Weather?
 
     @Update

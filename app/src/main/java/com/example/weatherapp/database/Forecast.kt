@@ -3,13 +3,14 @@ package com.example.weatherapp.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Date
+import java.util.Date
+import java.util.Calendar
 
-@Entity(tableName = "weather")
-class Weather {
+@Entity(tableName = "forecast")
+class Forecast {
     @JvmField
-    @PrimaryKey
-    var stationId: Int = 0
+    @PrimaryKey(autoGenerate = true)
+    var id = 0
 
     @JvmField
     @ColumnInfo( defaultValue = "CURRENT_TIMESTAMP")
@@ -20,6 +21,12 @@ class Weather {
 
     @JvmField
     var temperature: Int? = null
+
+    @JvmField
+    var temperatureMin: Int? = null
+
+    @JvmField
+    var temperatureMax: Int? = null
 
     @JvmField
     var humidity: Int? = null
@@ -37,11 +44,15 @@ class Weather {
     var uv: Int? = null
 
     @JvmField
-    var windSpeed: Float? = null
+    var windSpeed: Int? = null
 
     @JvmField
     var windDirection: String? = null
 
+    @JvmField
+    var precipitation: Int? = null
 
+    @JvmField
+    var precipitationProbability: Int? = null
 
 }

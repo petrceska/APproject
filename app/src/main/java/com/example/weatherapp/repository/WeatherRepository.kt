@@ -6,19 +6,19 @@ import com.example.weatherapp.database.WeatherDao
 
 class WeatherRepository(private val weatherDao: WeatherDao) {
 
-    fun getWeatherByCityId(cityId : Number){
-        weatherDao.getWeatherByCityId(cityId)
+    fun getWeatherByStationId(id : Int) : Weather?{
+        return weatherDao.getWeatherByStationId(id)
     }
 
-    fun getWeatherByCityName(cityName : String) {
-        weatherDao.getWeatherByCityName(cityName)
+    fun getWeatherByCityName(cityName : String): Weather? {
+        return weatherDao.getWeatherByCityName(cityName)
     }
 
     fun insert(weather: Weather) {
         weatherDao.insert(weather)
     }
 
-    fun count(): Int {
+    fun countWeather(): Int {
         return weatherDao.countWeathers()
     }
 

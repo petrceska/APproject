@@ -10,10 +10,10 @@ class ServiceBuilder {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    private var weatherService: WeatherService = retrofit.create(WeatherService::class.java)
+    private var weatherApiService: WeatherApiService = retrofit.create(WeatherApiService::class.java)
 
-    fun getWeatherService(): WeatherService {
-        return weatherService
+    fun getWeatherService(): WeatherApiService {
+        return weatherApiService
     }
 
 }

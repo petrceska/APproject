@@ -5,13 +5,9 @@
       <map>
         <entry key="..\:/Github/Android/APproject/app/src/main/res/drawable/roundstyle.xml" value="0.1935" />
         <entry key="..\:/Github/Android/APproject/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>
-
-<!--  <component name="ExternalStorageConfigurationManager" enabled="true" />-->
-<!--  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">-->
-<!--    <output url="file://$PROJECT_DIR$/out" />-->
-
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />

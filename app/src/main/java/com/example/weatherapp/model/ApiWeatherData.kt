@@ -1,6 +1,13 @@
 package com.example.weatherapp.model
 
-class DayWeatherData {
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.*
+
+
+class ApiWeatherData {
+    var id : Int = 0
+    var actualized: Date = Calendar.getInstance().time
     var rh : Number? = null
     var pod : String? = null
     var lon : Number? = null
