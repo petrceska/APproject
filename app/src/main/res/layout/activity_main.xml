@@ -4,71 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
     android:background="#246EE9"
-    >
+    tools:context=".view.MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="27dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="34dp" />
+
+    <ProgressBar
+        android:id="@+id/temp_ID"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="63dp"
+        android:layout_height="66dp"
+        android:gravity="center"
+        android:progress="25"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/Location_ID" />
+
+    <TextView
+        android:id="@+id/Location_ID"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/date_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Day and Date"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/temp_ID" />
 
 
-    <RelativeLayout
-        android:id="@+id/mainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/drizzle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.412" />
 
-        <ProgressBar
-            android:id="@+id/temp_ID"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="63dp"
-            android:layout_height="66dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="74dp"
-            android:gravity="center"
-            android:progress="25" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Sunshine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    //TODO fix Layout...
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundstyle"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/Location_ID"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="44dp"
-            android:text="Location"
-            android:textSize="20sp" />
+            android:padding="10dip"
+            android:text="Wind" />
 
         <TextView
-            android:id="@+id/date_ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="143dp"
-            android:text="Day and Date" />
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:text="Wind"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="383dp"
-            android:layout_height="101dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="67dp"
-            android:background="@drawable/roundstyle"
-            android:backgroundTint="#CCCCCC"
+    </LinearLayout>
 
-            android:textColor="@android:color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="101dp" />
 
-    </RelativeLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
