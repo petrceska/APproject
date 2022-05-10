@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         WeatherAppViewModel.weather.observe(this) { weather ->
             if (weather != null) {
                 //actualize GUI after successful api or database call
-                //TODO here you can actualize app
+                //TODO here you can actualize GUI of the app
                 Log.i(null, weather.cityName.toString())
             }
         }

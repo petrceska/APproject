@@ -55,4 +55,6 @@ class Forecast {
     @JvmField
     var precipitationProbability: Int? = null
 
+    //TODO rewrite variable types so it actually matches with data you will get from API
+
 }

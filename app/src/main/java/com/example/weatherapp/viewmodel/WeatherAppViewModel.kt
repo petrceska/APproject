@@ -141,7 +141,8 @@ class WeatherAppViewModel : ViewModel() {
         if (apiResponse.body()?.data?.get(0) != null) {
             val data = apiResponse.body()?.data!![0]
             val weather = Weather().apply {
-                //TODO
+                //TODO parse data from API object to DB objecct
+
                 stationId = data.id
                 cityName = data.city_name
                 temperature = data.temp?.toInt()
@@ -155,7 +156,7 @@ class WeatherAppViewModel : ViewModel() {
         if (apiResponse.body()?.data?.get(0) != null) {
             val data = apiResponse.body()?.data!![0]
             val forecast = Forecast().apply {
-            //TODO
+            //TODO parse data from API object to DB objecct
             }
             return forecast
         }
