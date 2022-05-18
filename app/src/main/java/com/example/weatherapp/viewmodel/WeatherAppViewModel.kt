@@ -79,6 +79,7 @@ class WeatherAppViewModel : ViewModel() {
                         _weather.postValue(weather)
                     } else {
                         //TODO wrong api response
+                        //Toast.makeText
                     }
                 }
             }

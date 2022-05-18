@@ -42,6 +42,8 @@ class Weather {
     @JvmField
     var windDirection: String? = null
 
+
+
 //TODO rewrite variable types so it actually matches with data you will get from API
 
 }

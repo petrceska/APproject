@@ -19,6 +19,8 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.CancellationTokenSource
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
         WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
 
+        //TODO API instead
         val textView: TextView = findViewById(R.id.date_ID)
         val calendar: Calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
@@ -108,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     //actualize GUI after successful location retrieval
     private fun showWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
@@ -115,12 +119,16 @@ class MainActivity : AppCompatActivity() {
 
         WeatherAppViewModel.weather.observe(this) { weather ->
             if (weather != null) {
+
                 //actualize GUI after successful api or database call
-                //TODO here you can actualize GUI of the app
-                Log.i(null, weather.cityName.toString())
+
+                //Log.i(null, weather.cityName.toString())
+                //Log.i(null, weather.temperature.toString())
             }
         }
     }
+
+
 
     //check that location in phone is on
     private fun isLocationEnabled(): Boolean {

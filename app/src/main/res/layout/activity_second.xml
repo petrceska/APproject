@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Second_activity">
+    tools:context=".view.SecondActivity">
 
     <SearchView
-        android:id="@+id/search_bar_id"
+        android:id="@+id/searchbar_id"
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -19,6 +19,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    //TODO Implement gridview disable scrolling
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycler_ID"
+        android:layout_width="380dp"
+        android:layout_height="584dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchbar_id"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
