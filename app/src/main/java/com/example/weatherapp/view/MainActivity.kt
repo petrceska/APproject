@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NavUtils
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
@@ -18,6 +19,8 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.CancellationTokenSource
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
         WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
 
+        //TODO API instead
         val textView: TextView = findViewById(R.id.date_ID)
         val calendar: Calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
@@ -107,6 +111,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     //actualize GUI after successful location retrieval
     private fun showWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
@@ -114,6 +119,7 @@ class MainActivity : AppCompatActivity() {
 
         WeatherAppViewModel.weather.observe(this) { weather ->
             if (weather != null) {
+
                 //actualize GUI after successful api or database call
                 //TODO here you can actualize GUI of the app
                 //show the location
@@ -131,9 +137,14 @@ class MainActivity : AppCompatActivity() {
                 //val temperature_Display = findViewById<TextView>(R.id.temp_ID)
                 //temperature_Display.text = weather.temperature.toString()
                 Log.i(null, weather.cityName.toString())
+
+                //Log.i(null, weather.cityName.toString())
+                //Log.i(null, weather.temperature.toString())
             }
         }
     }
+
+
 
     //check that location in phone is on
     private fun isLocationEnabled(): Boolean {

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="70dp"
+    android:layout_marginRight="20dp">
+    //TODO align text to the left
+
+    <TextView
+        android:id="@+id/temp_view"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:hint="Temp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/city_View"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:textAlignment="viewStart"
+        android:textSize="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temp_view" />
+
+    <TextView
+        android:id="@+id/country_View"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:hint="Country"
+        android:textAlignment="viewStart"
+        android:textSize="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_View" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="49dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/wind_View"
+        android:layout_width="60dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="6dp"
+        android:hint="Humidity"
+        android:textAlignment="center"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/humidity_View"
+        android:layout_width="60dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        android:hint="wind"
+        android:textAlignment="center"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,7 +73,7 @@
 
     //TODO fix Layout...
     <LinearLayout
-        android:layout_width="400dp"
+        android:layout_width="380dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundstyle"
