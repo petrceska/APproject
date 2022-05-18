@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 import java.sql.Date
 
 @Entity(tableName = "weather")
-class Weather {
+class Weather{
+    //TODO: check the type of the variable return by the API
     @JvmField
     @PrimaryKey
     var stationId: Int = 0
@@ -16,10 +17,13 @@ class Weather {
     var actualized: String? = null
 
     @JvmField
+    var countryCode: String? = null
+
+    @JvmField
     var cityName: String? = null
 
     @JvmField
-    var temperature: Int? = null
+    var temperature: Double? = null
 
     @JvmField
     var humidity: Int? = null
@@ -28,19 +32,19 @@ class Weather {
     var clouds: Int? = null
 
     @JvmField
-    var sunrise: Int? = null
+    var sunrise: String? = null
 
     @JvmField
-    var sunset: Int? = null
+    var sunset: String? = null
 
     @JvmField
     var uv: Int? = null
 
     @JvmField
-    var windSpeed: Float? = null
+    var windSpeed: Double? = null
 
     @JvmField
-    var windDirection: String? = null
+    var windDirection: Int? = null
 
 //TODO rewrite variable types so it actually matches with data you will get from API
 

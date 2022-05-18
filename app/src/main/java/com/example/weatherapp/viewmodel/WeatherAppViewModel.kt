@@ -145,7 +145,7 @@ class WeatherAppViewModel : ViewModel() {
 
                 stationId = data.id
                 cityName = data.city_name
-                temperature = data.temp?.toInt()
+                temperature = data.temp?.toDouble()
             }
             return weather
         }

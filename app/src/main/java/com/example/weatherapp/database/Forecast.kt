@@ -17,16 +17,19 @@ class Forecast {
     var actualized: String? = null
 
     @JvmField
+    var countryName: String? = null
+
+    @JvmField
     var cityName: String? = null
 
     @JvmField
-    var temperature: Int? = null
+    var temperature: Double? = null
 
     @JvmField
-    var temperatureMin: Int? = null
+    var temperatureMin: Double? = null
 
     @JvmField
-    var temperatureMax: Int? = null
+    var temperatureMax: Double? = null
 
     @JvmField
     var humidity: Int? = null
@@ -35,19 +38,19 @@ class Forecast {
     var clouds: Int? = null
 
     @JvmField
-    var sunrise: Int? = null
+    var sunrise: String? = null
 
     @JvmField
-    var sunset: Int? = null
+    var sunset: String? = null
 
     @JvmField
     var uv: Int? = null
 
     @JvmField
-    var windSpeed: Int? = null
+    var windSpeed: Double? = null
 
     @JvmField
-    var windDirection: String? = null
+    var windDirection: Int? = null
 
     @JvmField
     var precipitation: Int? = null

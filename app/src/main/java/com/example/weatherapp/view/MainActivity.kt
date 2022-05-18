@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NavUtils
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
@@ -117,6 +116,20 @@ class MainActivity : AppCompatActivity() {
             if (weather != null) {
                 //actualize GUI after successful api or database call
                 //TODO here you can actualize GUI of the app
+                //show the location
+                var loc = Locale("", weather.countryCode.toString())
+                //var loc = Locale("", "DK")
+                var countryName = loc.displayCountry
+                Log.i(null, countryName.toString())
+                var location_message = weather.cityName.toString() + ", " + countryName
+                if (countryName == "NULL") {
+                    location_message = weather.cityName.toString()
+                }
+                val location_Display = findViewById<TextView>(R.id.Location_ID)
+                location_Display.text = location_message
+                //update the temperature
+                //val temperature_Display = findViewById<TextView>(R.id.temp_ID)
+                //temperature_Display.text = weather.temperature.toString()
                 Log.i(null, weather.cityName.toString())
             }
         }
