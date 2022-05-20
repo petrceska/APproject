@@ -145,8 +145,18 @@ class WeatherAppViewModel : ViewModel() {
                 //TODO parse data from API object to DB objecct
 
                 stationId = data.id
+                actualized = data.actualized.toString()
+                countryCode = data.country_code
                 cityName = data.city_name
-                temperature = data.temp?.toInt()
+                temperature = data.temp?.toDouble()
+                humidity = data.rh?.toInt()
+                clouds = data.clouds?.toInt()
+                sunrise = data.sunrise
+                sunset = data.sunset
+                uv = data.uv?.toInt()
+                windSpeed = data.wind_spd?.toDouble()
+                windDirection = data.wind_dir?.toInt()
+
             }
             return weather
         }
@@ -158,6 +168,19 @@ class WeatherAppViewModel : ViewModel() {
             val data = apiResponse.body()?.data!![0]
             val forecast = Forecast().apply {
             //TODO parse data from API object to DB objecct
+                temperature = data.temp?.toDouble()
+                temperatureMin = data.min_temp?.toDouble()
+                temperatureMax = data.max_temp?.toDouble()
+                humidity = data.rh?.toInt()
+                clouds = data.clouds?.toInt()
+                sunrise = data.sunrise_ts?.toString()
+                sunset = data.sunset_ts?.toString()
+                uv = data.uv?.toInt()
+                windSpeed = data.wind_spd?.toDouble()
+                windDirection = data.wind_dir?.toInt()
+                precipitation = data.precip?.toInt()
+                precipitationProbability = data.pop?.toInt()
+
             }
             return forecast
         }

@@ -116,6 +116,22 @@ class MainActivity : AppCompatActivity() {
             if (weather != null) {
 
                 //actualize GUI after successful api or database call
+                //TODO here you can actualize GUI of the app
+                //show the location
+                var loc = Locale("", weather.countryCode.toString())
+                //var loc = Locale("", "DK")
+                var countryName = loc.displayCountry
+                Log.i(null, countryName.toString())
+                var location_message = weather.cityName.toString() + ", " + countryName
+                if (countryName == "NULL") {
+                    location_message = weather.cityName.toString()
+                }
+                val location_Display = findViewById<TextView>(R.id.Location_ID)
+                location_Display.text = location_message
+                //update the temperature
+                //val temperature_Display = findViewById<TextView>(R.id.temp_ID)
+                //temperature_Display.text = weather.temperature.toString()
+                Log.i(null, weather.cityName.toString())
 
                 //TODO make a set function for the main activity
                 val calendar: Calendar = Calendar.getInstance()
