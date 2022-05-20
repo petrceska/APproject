@@ -21,13 +21,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="34dp" />
 
-    <ProgressBar
+    <TextView
         android:id="@+id/temp_ID"
         style="?android:attr/progressBarStyle"
         android:layout_width="63dp"
         android:layout_height="66dp"
         android:gravity="center"
         android:progress="25"
+        android:textSize="50sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/Location_ID" />
 

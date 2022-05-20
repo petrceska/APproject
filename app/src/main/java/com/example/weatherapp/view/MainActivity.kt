@@ -36,12 +36,7 @@ class MainActivity : AppCompatActivity() {
         WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
         WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
 
-        //TODO API instead
-        val textView: TextView = findViewById(R.id.date_ID)
-        val calendar: Calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-        val dateTime = simpleDateFormat.format(calendar.time)
-        textView.text = dateTime
+
 
         //Update weather based on actual location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -122,6 +117,14 @@ class MainActivity : AppCompatActivity() {
 
                 //actualize GUI after successful api or database call
 
+                //TODO make a set function for the main activity
+                val calendar: Calendar = Calendar.getInstance()
+                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                val dateTime = simpleDateFormat.format(calendar.time)
+                date_ID.text = dateTime
+
+                Location_ID.text = weather.cityName.toString()
+                temp_ID.text = weather.temperature.toString()
                 //Log.i(null, weather.cityName.toString())
                 //Log.i(null, weather.temperature.toString())
             }
