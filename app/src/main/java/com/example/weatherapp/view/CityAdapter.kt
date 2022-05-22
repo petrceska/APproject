@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.city_view.view.*
 
+
 class cityAdapter (var citys: List <City>) : RecyclerView.Adapter<cityAdapter.CityViewHolder> ()
 {
     inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.city_view, parent, false)

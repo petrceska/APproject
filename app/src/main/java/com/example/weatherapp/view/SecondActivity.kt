@@ -23,8 +23,8 @@ class SecondActivity : AppCompatActivity() {
         City(29,"Odense","Denmark",4,4.4),
         City(29,"Odense","Denmark",4,4.4)
     )
-    //TODO Implement GRIDVIEW
-    // Set upt the Recyclerview
+        //TODO Implement GRIDVIEW
+        // Set upt the Recyclerview
     GridLayoutManager(
         this, //Context
         2, //Span count
