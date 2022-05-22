@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_first.*
 import org.json.JSONObject
 
 
@@ -149,8 +150,8 @@ class MainActivity : AppCompatActivity() {
                 if (countryName == "NULL") {
                     location_message = weather.cityName.toString()
                 }
-                val location_Display = findViewById<TextView>(R.id.Location_ID)
-                location_Display.text = location_message
+                //val location_Display = findViewById<TextView>(R.id.Location_ID)
+                Location_ID.text = location_message
                 //update the temperature
                 //val temperature_Display = findViewById<TextView>(R.id.temp_ID)
                 //temperature_Display.text = weather.temperature.toString()
