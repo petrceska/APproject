@@ -15,9 +15,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import org.json.JSONObject
+import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WeatherAppViewModel : ViewModel() {
-    private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
+    //private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
+    private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
+    // for another api
+    val API: String = "0cdd38b1b7a634430f4cb4b640ab6a26"
 
     private lateinit var job: Job
 
@@ -54,6 +61,44 @@ class WeatherAppViewModel : ViewModel() {
                     _weather.postValue(weather)
                 } else {
                     //TODO wrong api response
+                    var response:String?
+                    try{
+                        response = URL("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
+                            Charsets.UTF_8
+                        )
+                    }catch (e: Exception){
+                        response = null
+                    }
+                    val jsonObject = JSONObject(response)
+                    val main = jsonObject.getJSONObject("main")
+                    val sys = jsonObject.getJSONObject("sys")
+                    val wind = jsonObject.getJSONObject("wind")
+                    val weather = jsonObject.getJSONArray("weather").getJSONObject(0)
+
+                    val city_name = jsonObject.getString("name")
+                    val country_code = sys.getString("country")
+                    val location_display = city_name+", "+country_code
+                    val weatherDescription = weather.getString("description")
+
+                    val temperature_api = main.getString("temp")
+                    val wind_speed = wind.getString("speed")
+                    val hum = main.getString("humidity")+" %"
+
+                    val updatedAt:Long = jsonObject.getLong("dt")
+                    val updatedAtText = "Updated at: "+ SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt*1000))
+
+                    val weather_return = Weather().apply {
+                        //TODO parse data from API object to DB objecct
+
+                        countryCode = country_code
+                        cityName = city_name
+                        temperature = temperature_api.toDouble()
+                        humidity = hum.toInt()
+                        windSpeed = wind_speed.toDouble()
+
+                    }
+                    weatherRepository.insert(weather_return)
+
                 }
             }
         }
@@ -79,7 +124,7 @@ class WeatherAppViewModel : ViewModel() {
                         _weather.postValue(weather)
                     } else {
                         //TODO wrong api response
-                        //Toast.makeText
+
                     }
                 }
             }
@@ -106,6 +151,42 @@ class WeatherAppViewModel : ViewModel() {
                     _forecast.postValue(forecast)
                 } else {
                     //TODO wrong api response
+                    var response:String?
+                    try{
+                        response = URL("https://api.openweathermap.org/data/2.5/forecast/daily?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
+                            Charsets.UTF_8
+                        )
+                    }catch (e: Exception){
+                        response = null
+                    }
+                    val jsonObject = JSONObject(response)
+                    val city = jsonObject.getJSONObject("city")
+                    val list = jsonObject.getJSONArray("list").getJSONObject(0)
+                    val weather_list = list.getJSONArray("weather").getJSONObject(0)
+
+                    val city_name = city.getString("name")
+                    val country_code = city.getString("country")
+                    val location_display = city_name+", "+country_code
+                    val weatherDescription = weather_list.getString("description")
+
+                    val temperature_api = list.getJSONObject("temp").getDouble("day")
+                    val wind_speed = list.getString("speed")
+                    val hum = list.getString("humidity")+" %"
+
+                    val updatedAt:Long = jsonObject.getLong("dt")
+                    val updatedAtText = "Updated at: "+ SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt*1000))
+
+                    val forecast_return = Forecast().apply {
+                        //TODO parse data from API object to DB objecct
+
+                        countryName = country_code
+                        cityName = city_name
+                        temperature = temperature_api.toDouble()
+                        humidity = hum.toInt()
+                        windSpeed = wind_speed.toDouble()
+
+                    }
+                    forecastRepository.insert(forecast_return)
                 }
             }
         }
