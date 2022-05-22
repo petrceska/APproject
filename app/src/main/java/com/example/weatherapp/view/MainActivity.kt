@@ -150,6 +150,7 @@ class MainActivity : AppCompatActivity() {
                                 // successfully obtained location -> actualize weather
                                 updateWeather(lat, lon)
 
+                            }
                         }
                     }
                 }
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
 
                 //Location_ID.text = weather.cityName.toString()
                 val temperature = weather.temperature?.toInt()
-                temp_ID.text = temperature.toString() + "°"
+//                temp_ID.text = temperature.toString() + "°"
                 //Location_ID.text = weather.cityName.toString()
                 //temp_ID.text = weather.temperature.toString()
                 //Log.i(null, weather.cityName.toString())
