@@ -26,7 +26,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="63dp"
         android:layout_height="66dp"
-        android:gravity="center"
+        android:hint="19"
         android:progress="25"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -74,27 +74,37 @@
 
     //TODO fix Layout...
     <LinearLayout
-        android:layout_width="380dp"
+        android:layout_width="360dp"
         android:layout_height="100dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundstyle"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/humidity_ID"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
             android:padding="10dip"
-            android:text="Wind" />
+            android:hint="Humidity11" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
             android:orientation="vertical"
             android:padding="10dip"
-            android:text="Wind" />
+            android:hint="Wind" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:hint="Wind" />
+
+
 
     </LinearLayout>
 
