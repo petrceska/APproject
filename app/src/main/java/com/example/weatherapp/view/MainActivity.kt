@@ -3,10 +3,12 @@ package com.example.weatherapp.view
 //Imported for date
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -33,10 +35,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val firstFragment = FirstFragment()
+        val secondFragment = SecondFragment()
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, firstFragment) //init fragment
+            commit() //first fragment is visible
+        }
+
+        btnFragment1.setOnClickListener{
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, firstFragment) //init fragment
+                addToBackStack(null)
+                commit() //first fragment is visible
+            }
+        }
+
+        btnFragment2.setOnClickListener{
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, secondFragment) //init fragment
+                addToBackStack(null)
+                commit() //first fragment is visible
+            }
+        }
+
         WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
         WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
-
-
 
         //Update weather based on actual location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -134,13 +159,13 @@ class MainActivity : AppCompatActivity() {
                 Log.i(null, weather.cityName.toString())
 
                 //TODO make a set function for the main activity
-                val calendar: Calendar = Calendar.getInstance()
-                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-                val dateTime = simpleDateFormat.format(calendar.time)
-                date_ID.text = dateTime
+                //val calendar: Calendar = Calendar.getInstance()
+                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                //val dateTime = simpleDateFormat.format(calendar.time)
+                //date_ID.text = dateTime
 
-                Location_ID.text = weather.cityName.toString()
-                temp_ID.text = weather.temperature.toString()
+                //Location_ID.text = weather.cityName.toString()
+                //temp_ID.text = weather.temperature.toString()
                 //Log.i(null, weather.cityName.toString())
                 //Log.i(null, weather.temperature.toString())
             }

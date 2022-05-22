@@ -7,109 +7,33 @@
     android:background="#246EE9"
     tools:context=".view.MainActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
+    <Button
+        android:id="@+id/btnFragment1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="27dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="34dp" />
-
-    <TextView
-        android:id="@+id/temp_ID"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="63dp"
-        android:layout_height="66dp"
-        android:hint="19"
-        android:progress="25"
-        android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/Location_ID" />
-
-    <TextView
-        android:id="@+id/Location_ID"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:hint="Location"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-    <TextView
-        android:id="@+id/date_ID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Day and Date"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/temp_ID" />
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/drizzle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Sunshine"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:text="Fragment 1"
+        app:layout_constraintEnd_toStartOf="@+id/btnFragment2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    //TODO fix Layout...
-    <LinearLayout
-        android:layout_width="360dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/roundstyle"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/btnFragment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fragment 2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnFragment1"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/humidity_ID"
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:padding="10dip"
-            android:hint="Humidity11" />
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:orientation="vertical"
-            android:padding="10dip"
-            android:hint="Wind" />
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:orientation="vertical"
-            android:padding="10dip"
-            android:hint="Wind" />
-
-
-
-    </LinearLayout>
-
-
-
+    <FrameLayout
+        android:id="@+id/flFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
