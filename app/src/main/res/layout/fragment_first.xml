@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.FirstFragment">
 
@@ -18,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="34dp" />
+        app:layout_constraintGuide_end="656dp" />
 
     <TextView
         android:id="@+id/temp_ID"
@@ -26,6 +27,7 @@
         android:layout_width="63dp"
         android:layout_height="66dp"
         android:hint="19"
+        android:textColor="@color/black"
         android:progress="25"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -36,6 +38,7 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:hint="Location"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />
@@ -44,6 +47,7 @@
         android:id="@+id/date_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:hint="Day and Date"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/temp_ID" />
@@ -59,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintVertical_bias="0.336" />
 
     <TextView
         android:id="@+id/textView2"
@@ -70,17 +74,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        />
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/roundstyle"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Day"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/drizzle" />
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Temp"
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/roundstyle"
-        android:orientation="horizontal"
 
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -90,7 +136,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Day" />
+            android:text="Day"
+            android:textColor="@color/black" />
 
         <ImageView
             android:layout_width="50dp"
@@ -104,7 +151,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Temp" />
+            android:text="Temp"
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
@@ -113,21 +161,20 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="30dp"
         android:background="@drawable/roundstyle"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeHandlerView3">
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Day" />
+            android:text="Day"
+            android:textColor="@color/black" />
 
         <ImageView
             android:layout_width="50dp"
@@ -141,7 +188,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Temp" />
+            android:text="Temp"
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
@@ -150,14 +198,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/roundstyle"
+        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/roundstyle"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6">
 
         <TextView
             android:id="@+id/humidity_ID"
@@ -167,7 +213,8 @@
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="78%\nHumidity" />
+            android:text="78%\nHumidity"
+            android:textColor="@color/black" />
 
 
         <View
@@ -184,7 +231,8 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="11km\nVisibility" />
+            android:text="11km\nVisibility"
+            android:textColor="@color/black" />
 
         <View
             android:layout_width="3dp"
@@ -202,7 +250,8 @@
             android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="This is line 1\nRandom" />
+            android:text="This is line 1\nRandom"
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
