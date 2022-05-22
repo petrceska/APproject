@@ -11,21 +11,21 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NavUtils
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
 
     private val WeatherAppViewModel: WeatherAppViewModel by viewModels()
+
+    private var firstRun = true
 
     // declare a global variable of FusedLocationProviderClient
     lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -33,21 +33,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
-        WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
-
+        WeatherAppViewModel.weatherRepository =
+            (application as WeatherApplication).weatherRepository
+        WeatherAppViewModel.forecastRepository =
+            (application as WeatherApplication).forecastRepository
 
 
         //Update weather based on actual location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //TODO call it whenever you need to update weather
-        this.actualizeWeatherBasedOnLocation()
-
+        if (firstRun) {
+            this.actualizeWeatherBasedOnLocation()
+            setObserver()
+            Log.i(null, "first run = true")
+            firstRun = false
+        }
+        Log.i(null, "onc")
     }
 
 
-    private fun actualizeWeatherBasedOnLocation() {
+    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true) {
         // initialize FusedLocationProviderClient
         Log.i(null, "1")
 
@@ -74,31 +80,45 @@ class MainActivity : AppCompatActivity() {
         //check that location in phone is on
         if (isLocationEnabled() == true) {
             val cts = CancellationTokenSource()
+            if (actualizeLocation) {
+                fusedLocationClient.getCurrentLocation(
+                    LocationRequest.PRIORITY_HIGH_ACCURACY,
+                    cts.token
+                ).addOnSuccessListener { actLoc ->
+                    if (actLoc != null) {
+                        val lat = actLoc.latitude
+                        val lon = actLoc.longitude
 
-            // get last known location if possible
-            fusedLocationClient.lastLocation.addOnSuccessListener {
-                if (it != null) {
-                    val lat = it.latitude
-                    val lon = it.longitude
-                    Log.i(null, lat.toString() + lon.toString())
+                        // successfully obtained location -> actualize weather
+                        updateWeather(lat, lon)
 
-                    // successfully obtained location -> actualize weather
-                    showWeather(lat, lon)
+                    }
+                }
+            } else {
 
-                } else {
-                    // there is not last known location -> retrieve actual location
-                    fusedLocationClient.getCurrentLocation(
-                        LocationRequest.PRIORITY_HIGH_ACCURACY,
-                        cts.token
-                    ).addOnSuccessListener {
-                        if (it != null) {
-                            val lat = it.latitude
-                            val lon = it.longitude
-                            Log.i(null, lat.toString() + lon.toString())
+                // get last known location if possible
+                fusedLocationClient.lastLocation.addOnSuccessListener { lastLoc ->
+                    if (lastLoc != null) {
+                        val lat = lastLoc.latitude
+                        val lon = lastLoc.longitude
 
-                            // successfully obtained location -> actualize weather
-                            showWeather(lat, lon)
+                        // successfully obtained location -> actualize weather
+                        updateWeather(lat, lon)
 
+                    } else {
+                        // retrieve actual location
+                        fusedLocationClient.getCurrentLocation(
+                            LocationRequest.PRIORITY_HIGH_ACCURACY,
+                            cts.token
+                        ).addOnSuccessListener { actLoc ->
+                            if (actLoc != null) {
+                                val lat = actLoc.latitude
+                                val lon = actLoc.longitude
+
+                                // successfully obtained location -> actualize weather
+                                updateWeather(lat, lon)
+
+                            }
                         }
                     }
                 }
@@ -107,15 +127,27 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //actualize GUI after successful location retrieval
-    private fun showWeather(lat: Number, lon: Number) {
+    private fun updateWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
         Log.i(null, lat.toString() + lon.toString())
+    }
 
+
+    //check that location in phone is on
+    private fun isLocationEnabled(): Boolean {
+        var locationManager: LocationManager =
+            getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    private fun setObserver(){
+        //actualize GUI after successful location and API retrieval
         WeatherAppViewModel.weather.observe(this) { weather ->
             if (weather != null) {
 
-                //actualize GUI after successful api or database call
+                //actualize GUI
                 //TODO here you can actualize GUI of the app
                 //show the location
                 var loc = Locale("", weather.countryCode.toString())
@@ -146,15 +178,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-    //check that location in phone is on
-    private fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
 }
