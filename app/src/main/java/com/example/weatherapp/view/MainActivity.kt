@@ -14,7 +14,9 @@ import androidx.core.app.ActivityCompat
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -171,10 +173,11 @@ class MainActivity : AppCompatActivity() {
                 val dateTime = simpleDateFormat.format(calendar.time)
                 date_ID.text = dateTime
 
-                Location_ID.text = weather.cityName.toString()
-                temp_ID.text = weather.temperature.toString()
+                //Location_ID.text = weather.cityName.toString()
+                val temperature = weather.temperature?.toInt()
+                temp_ID.text = temperature.toString() + "°"
                 //Log.i(null, weather.cityName.toString())
-                //Log.i(null, weather.temperature.toString())
+                Log.i(null, weather.temperature.toString()+ "°")
             }
         }
     }

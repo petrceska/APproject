@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hum_ID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#246EE9"
@@ -28,7 +29,7 @@
         android:layout_height="66dp"
         android:gravity="center"
         android:progress="25"
-        android:textSize="50sp"
+        android:textSize="42sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/Location_ID" />
 
@@ -73,6 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     //TODO fix Layout...
+
     <LinearLayout
         android:layout_width="380dp"
         android:layout_height="100dp"
@@ -84,6 +86,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/wind_ID"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:padding="10dip"
@@ -94,12 +97,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dip"
-            android:text="Wind" />
+            android:text="Hum" />
 
     </LinearLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
