@@ -89,12 +89,22 @@
             android:padding="10dip"
             android:hint="Humidity11" />
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/black" />
+
         <TextView
             android:layout_width="120dp"
             android:layout_height="90dp"
             android:orientation="vertical"
             android:padding="10dip"
             android:hint="Wind" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/black"/>
 
         <TextView
             android:layout_width="120dp"

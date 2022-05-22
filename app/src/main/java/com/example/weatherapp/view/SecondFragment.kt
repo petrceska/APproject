@@ -18,6 +18,7 @@ class SecondFragment : Fragment (R.layout.fragment_second) {
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<cityAdapter.CityViewHolder>? = null
+    //private var : mutableListOf<ObjectsfromDatabase>()
 
     //Data to populate the recyclerview
     var cityList = mutableListOf(
@@ -26,24 +27,20 @@ class SecondFragment : Fragment (R.layout.fragment_second) {
         City(29,"Odense","Denmark",4,4.4),
         City(29,"Odense","Denmark",4,4.4),
         City(29,"Odense","Denmark",4,4.4),
+        City(29,"Odense","Denmark",4,4.4),
+        City(29,"Odense","Denmark",4,4.4),
+        City(29,"Odense","Denmark",4,4.4),
+        City(29,"Odense","Denmark",4,4.4),
         City(29,"Odense","Denmark",4,4.4)
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
-    }
-
-
+    //https://www.youtube.com/watch?v=l1N9Onp5EKo
     override fun onViewCreated(itemView: View, savedInstanceState: Bundle?) {
         super.onViewCreated(itemView, savedInstanceState)
         recyclerview_id.apply {
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = GridLayoutManager(this@SecondFragment.context,2)
             // set the custom adapter to the RecyclerView
             adapter = cityAdapter(cityList)
 
