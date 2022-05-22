@@ -1,5 +1,7 @@
 package com.example.weatherapp.viewmodel
 
+import android.app.AlertDialog
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,8 +13,10 @@ import com.example.weatherapp.model.ApiForecast
 import com.example.weatherapp.repository.ForecastRepository
 import com.example.weatherapp.repository.ServiceBuilder
 import com.example.weatherapp.repository.WeatherRepository
+import com.example.weatherapp.view.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import org.json.JSONObject
@@ -67,7 +71,12 @@ class WeatherAppViewModel : ViewModel() {
                             Charsets.UTF_8
                         )
                     }catch (e: Exception){
-                        response = null
+                        val builder = AlertDialog.Builder(MainActivity())
+                        builder.setMessage("Error: Cannot get the data from the internet. Please try again later.")
+                        builder.setTitle("Error")
+                        builder.setPositiveButton("OK", null)
+                        builder.show()
+                        return@launch
                     }
                     val jsonObject = JSONObject(response)
                     val main = jsonObject.getJSONObject("main")
