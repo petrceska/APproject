@@ -43,4 +43,9 @@ class ApiWeatherData {
     var station : String? = null
     var elev_angle : Number? = null
     var app_temp : Number? = null
+    var weather = object {
+        var icon : String? = null
+        var code : String? = null
+        var description : String? = null
+    }
 }
