@@ -217,7 +217,7 @@ class MainActivity : AppCompatActivity() {
                 Location_ID.text = location_message
 
                 //Temp update
-                temp_ID.text = weather.temperature.toString() + " ° "
+                temp_ID.text = weather.temperature.toString() + "° "
 
                 //Humidity update
                 humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
                 UV_ID.text = weather.uv.toString() + "\nUV-Index"
 
                 //Wind Update
-                wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
+                wind_ID.text = weather.windSpeed.toString().take(3) + " km/h " + "\nWind"
 
                 //Description Update
                 description_ID.text = weather.weatherDescription.toString()
@@ -269,12 +269,12 @@ class MainActivity : AppCompatActivity() {
             day_ID6.text = forecast[5].date_time.toString().drop(5)
 
             //Update forecast temp
-            temp_ID1.text = forecast[0].temperature.toString()
-            temp_ID2.text = forecast[1].temperature.toString()
-            temp_ID3.text = forecast[2].temperature.toString()
-            temp_ID4.text = forecast[3].temperature.toString()
-            temp_ID5.text = forecast[4].temperature.toString()
-            temp_ID6.text = forecast[5].temperature.toString()
+            temp_ID1.text = forecast[0].temperature.toString() + "°"
+            temp_ID2.text = forecast[1].temperature.toString() + "°"
+            temp_ID3.text = forecast[2].temperature.toString() + "°"
+            temp_ID4.text = forecast[3].temperature.toString() + "°"
+            temp_ID5.text = forecast[4].temperature.toString() + "°"
+            temp_ID6.text = forecast[5].temperature.toString() + "°"
 
             //Update  imageview
             forecast_ID1.setImageResource(getImgByCode(forecast[0].weatherCode))

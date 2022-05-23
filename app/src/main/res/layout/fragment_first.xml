@@ -23,10 +23,9 @@
 
     <TextView
         android:id="@+id/temp_ID"
-        android:layout_width="63dp"
-        android:layout_height="66dp"
-        android:progress="25"
-        android:text="....."
+        android:layout_width="130dp"
+        android:layout_height="70dp"
+        android:text="...."
         android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -59,7 +58,7 @@
         android:src="@drawable/unknown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.336" />
@@ -94,7 +93,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -111,7 +110,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -135,7 +134,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -152,7 +151,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -177,7 +176,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -194,7 +193,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -218,7 +217,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
         <ImageView
@@ -235,7 +234,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 
@@ -259,7 +258,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
         <ImageView
@@ -275,7 +274,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -297,7 +296,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
         <ImageView
@@ -314,7 +313,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Loading...."
+            android:text="Loading"
             android:textColor="@color/black" />
 
 

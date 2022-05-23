@@ -31,7 +31,7 @@ class WeatherAdapter (var citys: List <Weather>) : RecyclerView.Adapter<WeatherA
             temp_view.text = citys[position].temperature.toString() + "° "
             city_View.text = citys[position].cityName + ", " + citys[position].countryCode
             //country_View.text = citys[position].countryCode
-            wind_View.text = "Wind: " + citys[position].windSpeed.toString() + " km/h"
+            wind_View.text = "Wind: " + citys[position].windSpeed.toString().take(3) + " km/h"
             humidity_View.text =   "Humidity: " + citys[position].humidity.toString() + " % "
             sunrise_view.text = "Sunrise: " + citys[position].sunrise.toString()
             sunset_view.text = "Sunset: " + citys[position].sunset.toString()
