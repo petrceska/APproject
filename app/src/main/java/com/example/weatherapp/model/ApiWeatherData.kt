@@ -47,5 +47,9 @@ class ApiWeatherData {
         var icon : String? = null
         var code : String? = null
         var description : String? = null
+
+        fun test(): String?{
+            return description
+        }
     }
 }

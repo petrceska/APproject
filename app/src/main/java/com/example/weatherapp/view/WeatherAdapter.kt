@@ -1,5 +1,6 @@
 package com.example.weatherapp.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,10 @@ class WeatherAdapter (var citys: List <Weather>) : RecyclerView.Adapter<WeatherA
 {
     inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
+    val myData = mutableListOf<Weather>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
+        myData.addAll(citys)
         val view = LayoutInflater.from(parent.context).inflate(R.layout.city_view, parent, false)
         return CityViewHolder(view)
     }

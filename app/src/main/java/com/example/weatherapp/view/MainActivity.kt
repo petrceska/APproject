@@ -34,7 +34,7 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
-    private val WeatherAppViewModel: WeatherAppViewModel by viewModels()
+     val WeatherAppViewModel: WeatherAppViewModel by viewModels()
 
     private var firstRun = true
 
@@ -45,8 +45,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        WeatherAppViewModel.weatherRepository =
+            (application as WeatherApplication).weatherRepository
+        WeatherAppViewModel.forecastRepository =
+            (application as WeatherApplication).forecastRepository
+
         val firstFragment = FirstFragment()
-        val secondFragment = SecondFragment()
+        val secondFragment = SecondFragment(WeatherAppViewModel)
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment, firstFragment) //init fragment
@@ -69,11 +75,6 @@ class MainActivity : AppCompatActivity() {
                 commit() //first fragment is visible
             }
         }
-
-        WeatherAppViewModel.weatherRepository =
-            (application as WeatherApplication).weatherRepository
-        WeatherAppViewModel.forecastRepository =
-            (application as WeatherApplication).forecastRepository
 
         // initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -207,7 +208,7 @@ class MainActivity : AppCompatActivity() {
                 val temperature = weather.temperature?.toInt()
 //                temp_ID.text = temperature.toString() + "°"
                 //Location_ID.text = weather.cityName.toString()
-                //temp_ID.text = weather.temperature.toString()
+                temp_ID.text = weather.temperature.toString()
                 //Log.i(null, weather.cityName.toString())
                 Log.i(null, weather.temperature.toString() + "°")
             }
