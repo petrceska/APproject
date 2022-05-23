@@ -26,8 +26,8 @@
         android:id="@+id/city_View"
         android:layout_width="70dp"
         android:layout_height="16dp"
-        android:layout_marginStart="8dp"
         android:hint="City"
+        android:layout_marginStart="8dp"
         android:textAlignment="viewStart"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,9 @@
         android:hint="Wind"
         android:textAlignment="viewStart"
         android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wind_View" />
+        app:layout_constraintTop_toBottomOf="@+id/wind_View"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
