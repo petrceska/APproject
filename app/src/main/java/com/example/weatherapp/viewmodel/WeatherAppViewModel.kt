@@ -66,6 +66,7 @@ class WeatherAppViewModel : ViewModel() {
                     weatherRepository.update(weather)
                 }
 
+
                 // propagate the weather for actual day
                 _weather.postValue(weather)
             } else {
@@ -77,12 +78,7 @@ class WeatherAppViewModel : ViewModel() {
                             Charsets.UTF_8
                         )
                 } catch (e: Exception) {
-                    val builder = AlertDialog.Builder(MainActivity())
-                    builder.setMessage("Error: Cannot get the data from the internet. Please try again later.")
-                    builder.setTitle("Error")
-                    builder.setPositiveButton("OK", null)
-                    builder.show()
-                    return@launch
+                    response = null
                 }
                 val jsonObject = JSONObject(response)
                 val main = jsonObject.getJSONObject("main")

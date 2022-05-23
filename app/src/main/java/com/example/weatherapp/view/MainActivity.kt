@@ -3,6 +3,7 @@ package com.example.weatherapp.view
 //Imported for date
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -232,12 +233,6 @@ class MainActivity : AppCompatActivity() {
                 //Humidity update
                 humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
 
-                //Sunrise update
-                sunrise_view.text = weather.sunrise.toString()
-
-                //Sunset update
-                sunset_view.text = weather.sunrise.toString()
-
                 //UV update
                 UV_ID.text = weather.uv.toString() + "\nUV-Index"
 
@@ -254,7 +249,15 @@ class MainActivity : AppCompatActivity() {
                 //Update of textview and imageview
                 //call function here when its done
             }
+            else{
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Error: Cannot get the data from the internet. Please try again later.")
+                builder.setTitle("Error")
+                builder.setPositiveButton("OK", null)
+                builder.show()
+            }
         }
+
 
 
 
