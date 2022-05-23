@@ -26,8 +26,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WeatherAppViewModel : ViewModel() {
-    //private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
-    private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
+    private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
+//    private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
 
     // for another api
     val API: String = "0cdd38b1b7a634430f4cb4b640ab6a26"

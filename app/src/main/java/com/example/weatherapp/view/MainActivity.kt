@@ -5,21 +5,14 @@ package com.example.weatherapp.view
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NavUtils
-import androidx.core.view.MotionEventCompat
 import androidx.fragment.app.FragmentManager.TAG
-import androidx.fragment.app.FragmentTransaction
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
@@ -29,11 +22,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.city_view.*
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlinx.android.synthetic.main.fragment_first.*
-import org.json.JSONObject
-import kotlin.math.abs
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -186,7 +176,6 @@ class MainActivity : AppCompatActivity() {
     private fun updateWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
         WeatherAppViewModel.getForecastFromApi(lat, lon)
-        Log.d(null, lat.toString() + lon.toString())
     }
 
 
@@ -222,7 +211,7 @@ class MainActivity : AppCompatActivity() {
                 //val dateTime = simpleDateFormat.format(calendar.time)
 
                 //Date update view
-                date_ID.text = weather.actualized.toString()
+                date_ID.text = weather.actualized.toString().substringBefore("GMT")
 
                 //Location update
                 Location_ID.text = location_message
