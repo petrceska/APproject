@@ -63,7 +63,8 @@ class SecondFragment(vm: WeatherAppViewModel) : Fragment(R.layout.fragment_secon
                 "London",
                 "Copenhagen",
                 "Madrid",
-                "Barcelona"
+                "Barcelona",
+                "Odense"
             )
         )
     }
