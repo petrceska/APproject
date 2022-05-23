@@ -189,9 +189,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 //Date update view
-                //val calendar: Calendar = Calendar.getInstance()
-                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-                //val dateTime = simpleDateFormat.format(calendar.time)
+                val calendar: Calendar = Calendar.getInstance()
+                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                val dateTime = simpleDateFormat.format(calendar.time)
 
                 //Date update view
                 date_ID.text = weather.actualized.toString()
