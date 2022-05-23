@@ -297,6 +297,8 @@ class WeatherAppViewModel : ViewModel() {
             val data = apiResponse.body()?.data!![0]
             val forecast = Forecast().apply {
                 //TODO parse data from API object to DB objecct
+
+                date_time = data.datetime
                 temperature = data.temp?.toDouble()
                 temperatureMin = data.min_temp?.toDouble()
                 temperatureMax = data.max_temp?.toDouble()

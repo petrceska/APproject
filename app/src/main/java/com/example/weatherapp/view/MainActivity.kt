@@ -26,7 +26,6 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_first.*
 import org.json.JSONObject
 import kotlin.math.abs
@@ -191,26 +190,63 @@ class MainActivity : AppCompatActivity() {
                 if (countryName == "NULL") {
                     location_message = weather.cityName.toString()
                 }
-                //val location_Display = findViewById<TextView>(R.id.Location_ID)
+
+                //Date update view
+                val calendar: Calendar = Calendar.getInstance()
+                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                val dateTime = simpleDateFormat.format(calendar.time)
+
+                //Date update view
+                date_ID.text = weather.actualized.toString()
+
+                //Location update
                 Location_ID.text = location_message
-                //update the temperature
-                //val temperature_Display = findViewById<TextView>(R.id.temp_ID)
-                //temperature_Display.text = weather.temperature.toString()
-                Log.i(null, weather.cityName.toString())
 
-                //TODO make a set function for the main activity
-                //val calendar: Calendar = Calendar.getInstance()
-                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-                //val dateTime = simpleDateFormat.format(calendar.time)
-                //date_ID.text = dateTime
+                //Temp update
+                temp_ID.text = weather.temperature.toString() + " ° "
 
-                //Location_ID.text = weather.cityName.toString()
-                val temperature = weather.temperature?.toInt()
-//                temp_ID.text = temperature.toString() + "°"
-                //Location_ID.text = weather.cityName.toString()
-                temp_ID.text = weather.temperature.toString()
-                //Log.i(null, weather.cityName.toString())
-                Log.i(null, weather.temperature.toString() + "°")
+                //Humidity update
+                humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
+
+                //UV update
+                UV_ID.text = weather.uv.toString()  + "\nUV-Index"
+
+                //Wind Update
+                wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
+
+                //Update of textview and imageview
+                //call function here when its done
+
+
+            }
+        }
+    }
+
+    private fun setObserverForecast() {
+        //actualize GUI after successful location and API retrieval
+        WeatherAppViewModel.forecast.observe(this) { forecast ->
+            if (forecast != null) {
+
+                //var loc = Locale("", forecast. )
+
+                //Updates forecast days
+                //date_ID1.text = forecast.
+                //date_ID2.text = forecast.
+                //date_ID3.text = forecast.
+
+                //Update forecast temp
+                //temp_ID1.text = forecast.s
+                //temp_ID2.text = forecast.
+                //temp_ID3.text = forecast.
+
+                //Update  imageview
+                //forecast_ID1
+                //forecast_ID2
+                //forecast_ID3
+
+                //call function here when its done
+
+
             }
         }
     }

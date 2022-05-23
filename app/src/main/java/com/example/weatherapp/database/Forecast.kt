@@ -20,6 +20,9 @@ class Forecast {
     var countryName: String? = null
 
     @JvmField
+    var date_time: String? = null
+
+    @JvmField
     var cityName: String? = null
 
     @JvmField
