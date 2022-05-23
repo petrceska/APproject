@@ -13,7 +13,7 @@ class Forecast {
     var id = 0
 
     @JvmField
-    @ColumnInfo( defaultValue = "CURRENT_TIMESTAMP")
+    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
     var actualized: String? = null
 
     @JvmField
@@ -62,7 +62,7 @@ class Forecast {
     var precipitationProbability: Int? = null
 
     @JvmField
-    var weatherCode : Int? = null
+    var weatherCode: Int? = null
 
 
     //TODO rewrite variable types so it actually matches with data you will get from API

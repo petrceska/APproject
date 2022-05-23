@@ -47,13 +47,13 @@ class Weather {
     var windDirection: Int? = null
 
     @JvmField
-    var weatherDescription : String? = null
+    var weatherDescription: String? = null
 
     @JvmField
-    var weatherCode : Int? = null
+    var weatherCode: Int? = null
 
     @JvmField
-    var visibility : String? = null
+    var visibility: String? = null
 
 
 //TODO rewrite variable types so it actually matches with data you will get from API

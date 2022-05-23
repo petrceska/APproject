@@ -243,8 +243,10 @@ class WeatherAppViewModel : ViewModel() {
                 windSpeed = data.wind_spd?.toDouble()
                 windDirection = data.wind_dir?.toInt()
                 val weatherDescription_string = data.weather.toString()
-                weatherDescription = weatherDescription_string.substringAfter("description=").substringBefore('}')
-                weatherCode = weatherDescription_string.substringAfter("code=").substringBefore(',').toDouble().toInt()
+                weatherDescription =
+                    weatherDescription_string.substringAfter("description=").substringBefore('}')
+                weatherCode = weatherDescription_string.substringAfter("code=").substringBefore(',')
+                    .toDouble().toInt()
 
             }
             return weather
@@ -255,7 +257,7 @@ class WeatherAppViewModel : ViewModel() {
     private fun forecastApiToDb(apiResponse: Response<ApiForecast>): Array<Forecast> {
         val forecastList = emptyList<Forecast>().toMutableList()
 
-        apiResponse.body()?.data?.take(6)?.forEach { it->
+        apiResponse.body()?.data?.take(6)?.forEach { it ->
             val forecast = Forecast().apply {
                 //TODO parse data from API object to DB objecct
 
@@ -272,7 +274,9 @@ class WeatherAppViewModel : ViewModel() {
                 windDirection = it.wind_dir?.toInt()
                 precipitation = it.precip?.toInt()
                 precipitationProbability = it.pop?.toInt()
-                weatherCode = it.weather.toString().substringAfter("code=").substringBefore(',').toDouble().toInt()
+                weatherCode =
+                    it.weather.toString().substringAfter("code=").substringBefore(',').toDouble()
+                        .toInt()
 
             }
             forecastList += forecast

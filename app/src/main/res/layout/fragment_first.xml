@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     tools:context=".view.FirstFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -25,9 +25,9 @@
         android:id="@+id/temp_ID"
         android:layout_width="63dp"
         android:layout_height="66dp"
+        android:progress="25"
         android:text="....."
         android:textColor="@color/black"
-        android:progress="25"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/Location_ID" />
@@ -46,8 +46,8 @@
         android:id="@+id/date_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:text="Loading...."
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/temp_ID" />
 
@@ -69,13 +69,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="unknown"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <LinearLayout
         android:id="@+id/linearLayout8"
@@ -83,12 +82,11 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/roundstyle"
         android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
-        >
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/day_ID4"
@@ -166,10 +164,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:weightSum="3"
-
         android:background="@drawable/roundstyle"
+
         android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -208,9 +206,9 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:weightSum="3"
-        android:orientation="horizontal"
         android:background="@drawable/roundstyle"
+        android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -247,11 +245,11 @@
         android:id="@+id/linearLayout5"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundstyle"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:background="@drawable/roundstyle"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -326,9 +324,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/roundstyle"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"

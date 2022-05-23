@@ -36,7 +36,7 @@ import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
-     val WeatherAppViewModel: WeatherAppViewModel by viewModels()
+    val WeatherAppViewModel: WeatherAppViewModel by viewModels()
 
     private var firstRun = true
 
@@ -74,23 +74,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-       var fragment_two = false
+        var fragment_two = false
         btnFragment2.setOnClickListener {
-           if(!fragment_two){
-               supportFragmentManager.beginTransaction().apply {
-                   hide(firstFragment)
-                   add(R.id.flFragment, secondFragment)
-                   addToBackStack(TAG)
-                   commit()
-               }
-               fragment_two = true
-           }
-            else{
-               supportFragmentManager.beginTransaction().apply {
-                   hide(firstFragment)
-                   show(secondFragment)
-                   addToBackStack(TAG)
-                   commit()
+            if (!fragment_two) {
+                supportFragmentManager.beginTransaction().apply {
+                    hide(firstFragment)
+                    add(R.id.flFragment, secondFragment)
+                    addToBackStack(TAG)
+                    commit()
+                }
+                fragment_two = true
+            } else {
+                supportFragmentManager.beginTransaction().apply {
+                    hide(firstFragment)
+                    show(secondFragment)
+                    addToBackStack(TAG)
+                    commit()
 //                replace(R.id.flFragment, secondFragment) //init fragment
 //                addToBackStack(null)
 //                commit() //first fragment is visible
@@ -233,7 +232,7 @@ class MainActivity : AppCompatActivity() {
                 humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
 
                 //UV update
-                UV_ID.text = weather.uv.toString()  + "\nUV-Index"
+                UV_ID.text = weather.uv.toString() + "\nUV-Index"
 
                 //Wind Update
                 wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
@@ -250,76 +249,75 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private fun updateObserver() {
-        //actualize GUI after successful location and API retrieval
-        WeatherAppViewModel.weather.observe(this) { weather ->
+        private fun updateObserver() {
+            //actualize GUI after successful location and API retrieval
+            WeatherAppViewModel.weather.observe(this) { weather ->
 
-            //actualize GUI
-            //TODO here you can actualize GUI of the app
-            //show the location
-            var loc = Locale("", weather.countryCode.toString())
-            //var loc = Locale("", "DK")
-            var countryName = loc.displayCountry
-            Log.i(null, countryName.toString())
-            var location_message = weather.cityName.toString() + ", " + countryName
-            if (countryName == "NULL") {
-                location_message = weather.cityName.toString()
+                //actualize GUI
+                //TODO here you can actualize GUI of the app
+                //show the location
+                var loc = Locale("", weather.countryCode.toString())
+                //var loc = Locale("", "DK")
+                var countryName = loc.displayCountry
+                Log.i(null, countryName.toString())
+                var location_message = weather.cityName.toString() + ", " + countryName
+                if (countryName == "NULL") {
+                    location_message = weather.cityName.toString()
+                }
+
+                //Date update view
+                //val calendar: Calendar = Calendar.getInstance()
+                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                //val dateTime = simpleDateFormat.format(calendar.time)
+
+                //Date update view
+                date_ID.text = weather.actualized.toString()
+
+                //Location update
+                Location_ID.text = location_message
+
+                //Temp update
+                temp_ID.text = weather.temperature.toString() + " ° "
+
+                //Humidity update
+                humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
+
+                //UV update
+                UV_ID.text = weather.uv.toString() + "\nUV-Index"
+
+                //Wind Update
+                wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
+
+                //Description Update
+                description_ID.text = weather.weatherDescription.toString()
+
+                //Logo Update
+                when (weather.weatherCode?.toInt()) {
+                    202, 232 -> imageView.setImageResource(R.drawable.thunderstorm_heavy_rain)
+                    201, 231 -> imageView.setImageResource(R.drawable.thunderstorm_rain)
+                    200, 230 -> imageView.setImageResource(R.drawable.thunderstormlightrain)
+                    233 -> imageView.setImageResource(R.drawable.thunderstorm_hail)
+                    300, 301, 302, 500, 501, 502, 511, 520, 521, 522 -> imageView.setImageResource(R.drawable.rain)
+                    600 -> imageView.setImageResource(R.drawable.lightsnow)
+                    601, 602 -> imageView.setImageResource(R.drawable.snow)
+                    610 -> imageView.setImageResource(R.drawable.mixsnowandrain)
+                    611, 612 -> imageView.setImageResource(R.drawable.sleet)
+                    621, 622, 623 -> imageView.setImageResource(R.drawable.snowshower)
+                    700, 711, 721, 731, 741, 751 -> imageView.setImageResource(R.drawable.mist)
+                    800 -> imageView.setImageResource(R.drawable.clearsky)
+                    801, 802 -> imageView.setImageResource(R.drawable.fewclouds)
+                    803 -> imageView.setImageResource(R.drawable.brokenclouds)
+                    804 -> imageView.setImageResource(R.drawable.overcastclouds)
+                    else -> imageView.setImageResource(R.drawable.unknown)
+                }
+                //imageView.setImageResource()
+
+                //Update of textview and imageview
+                //call function here when its done
+
+
             }
-
-            //Date update view
-            //val calendar: Calendar = Calendar.getInstance()
-            //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-            //val dateTime = simpleDateFormat.format(calendar.time)
-
-            //Date update view
-            date_ID.text = weather.actualized.toString()
-
-            //Location update
-            Location_ID.text = location_message
-
-            //Temp update
-            temp_ID.text = weather.temperature.toString() + " ° "
-
-            //Humidity update
-            humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
-
-            //UV update
-            UV_ID.text = weather.uv.toString()  + "\nUV-Index"
-
-            //Wind Update
-            wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
-
-            //Description Update
-            description_ID.text = weather.weatherDescription.toString()
-
-            //Logo Update
-            when(weather.weatherCode?.toInt()) {
-                202,232 -> imageView.setImageResource(R.drawable.thunderstorm_heavy_rain)
-                201,231 -> imageView.setImageResource(R.drawable.thunderstorm_rain)
-                200,230 -> imageView.setImageResource(R.drawable.thunderstormlightrain)
-                233 -> imageView.setImageResource(R.drawable.thunderstorm_hail)
-                300,301,302,500,501,502,511,520,521,522 -> imageView.setImageResource(R.drawable.rain)
-                600 -> imageView.setImageResource(R.drawable.lightsnow)
-                601,602 -> imageView.setImageResource(R.drawable.snow)
-                610 -> imageView.setImageResource(R.drawable.mixsnowandrain)
-                611,612 -> imageView.setImageResource(R.drawable.sleet)
-                621,622,623 -> imageView.setImageResource(R.drawable.snowshower)
-                700,711,721,731,741,751 -> imageView.setImageResource(R.drawable.mist)
-                800 -> imageView.setImageResource(R.drawable.clearsky)
-                801,802 -> imageView.setImageResource(R.drawable.fewclouds)
-                803 -> imageView.setImageResource(R.drawable.brokenclouds)
-                804 -> imageView.setImageResource(R.drawable.overcastclouds)
-                else -> imageView.setImageResource(R.drawable.unknown)
-            }
-            //imageView.setImageResource()
-
-            //Update of textview and imageview
-            //call function here when its done
-
-
-
         }
-    }
 
         //actualize GUI after successful location and API retrieval
         WeatherAppViewModel.forecast.observe(this) { forecast ->
@@ -360,21 +358,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getImgByCode(code : Int?): Int {
-        when(code) {
-            202,232 -> return R.drawable.thunderstorm_heavy_rain
-            201,231 -> return R.drawable.thunderstorm_rain
-            200,230 -> return R.drawable.thunderstormlightrain
+    fun getImgByCode(code: Int?): Int {
+        when (code) {
+            202, 232 -> return R.drawable.thunderstorm_heavy_rain
+            201, 231 -> return R.drawable.thunderstorm_rain
+            200, 230 -> return R.drawable.thunderstormlightrain
             233 -> return R.drawable.thunderstorm_hail
-            300,301,302,500,501,502,511,520,521,522 -> return R.drawable.rain
+            300, 301, 302, 500, 501, 502, 511, 520, 521, 522 -> return R.drawable.rain
             600 -> return R.drawable.lightsnow
-            601,602 -> return R.drawable.snow
+            601, 602 -> return R.drawable.snow
             610 -> return R.drawable.mixsnowandrain
-            611,612 -> return R.drawable.sleet
-            621,622,623 -> return R.drawable.snowshower
-            700,711,721,731,741,751 -> return R.drawable.mist
+            611, 612 -> return R.drawable.sleet
+            621, 622, 623 -> return R.drawable.snowshower
+            700, 711, 721, 731, 741, 751 -> return R.drawable.mist
             800 -> return R.drawable.clearsky
-            801,802 -> return R.drawable.fewclouds
+            801, 802 -> return R.drawable.fewclouds
             803 -> return R.drawable.brokenclouds
             804 -> return R.drawable.overcastclouds
             else -> return R.drawable.unknown
