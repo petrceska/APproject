@@ -190,7 +190,13 @@ class MainActivity : AppCompatActivity() {
                 if (countryName == "NULL") {
                     location_message = weather.cityName.toString()
                 }
-                //val location_Display = findViewById<TextView>(R.id.Location_ID)
+
+                val calendar: Calendar = Calendar.getInstance()
+                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                val dateTime = simpleDateFormat.format(calendar.time)
+                date_ID.text = dateTime
+
+
                 Location_ID.text = location_message
                 //update the temperature
                 //val temperature_Display = findViewById<TextView>(R.id.temp_ID)

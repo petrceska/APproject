@@ -145,7 +145,6 @@
             android:layout_weight="1"
             android:src="@drawable/drizzle" />
 
-
         <TextView
             android:layout_width="100dp"
             android:layout_height="50dp"
@@ -153,8 +152,6 @@
             android:gravity="center"
             android:text="Temp"
             android:textColor="@color/black" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -218,12 +215,12 @@
 
 
         <View
-            android:layout_width="3dp"
+            android:layout_width="2dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:background="@android:color/black" />
+            android:background="#C0BEBE" />
 
         <TextView
             android:layout_width="100dp"
@@ -235,13 +232,12 @@
             android:textColor="@color/black" />
 
         <View
-            android:layout_width="3dp"
+            android:layout_width="2dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-
-            android:background="@android:color/black" />
+            android:background="#C0BEBE" />
 
         <TextView
             android:layout_width="100dp"
