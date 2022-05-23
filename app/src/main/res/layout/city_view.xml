@@ -30,7 +30,7 @@
         android:layout_width="100dp"
         android:layout_height="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:hint="City"
         android:textAlignment="viewStart"
         android:textSize="12sp"
@@ -73,15 +73,27 @@
         app:layout_constraintTop_toBottomOf="@+id/city_View" />
 
     <TextView
-        android:id="@+id/random_view"
+        android:id="@+id/sunrise_view"
         android:layout_width="100dp"
         android:layout_height="15dp"
         android:layout_marginStart="16dp"
-        android:hint="random"
+        android:hint="Sunset"
         android:textAlignment="textStart"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/humidity_View" />
+
+    <TextView
+        android:id="@+id/sunset_view"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="16dp"
+        android:hint="Sunrise"
+        android:textAlignment="textStart"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sunrise_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
