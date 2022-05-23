@@ -6,6 +6,8 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -102,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true) {
+    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true, databaseCall: Boolean = true) {
         // check permissions of for retrieving location
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -136,7 +138,7 @@ class MainActivity : AppCompatActivity() {
                         val lon = actLoc.longitude
 
                         // successfully obtained location -> actualize weather
-                        updateWeather(lat, lon)
+                        updateWeather(lat, lon, databaseCall)
 
                     }
                 }
@@ -149,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                         val lon = lastLoc.longitude
 
                         // successfully obtained location -> actualize weather
-                        updateWeather(lat, lon)
+                        updateWeather(lat, lon, databaseCall)
 
                     } else {
                         // retrieve actual location
@@ -162,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                                 val lon = actLoc.longitude
 
                                 // successfully obtained location -> actualize weather
-                                updateWeather(lat, lon)
+                                updateWeather(lat, lon, databaseCall)
 
                             }
                         }
@@ -173,9 +175,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun updateWeather(lat: Number, lon: Number) {
-        WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
-        WeatherAppViewModel.getForecastFromApi(lat, lon)
+    private fun updateWeather(lat: Number, lon: Number, databaseCall : Boolean = true) {
+        var city = getCityNameByCoordinates(lat.toDouble(), lon.toDouble())
+        if (city != null && databaseCall) {
+            Log.i(null, "beru DB")
+            WeatherAppViewModel.getActualWeatherPreferablyDb(city)
+            WeatherAppViewModel.getForecastPreferablyDb(city)
+        }else{
+            Log.i(null, "beru API")
+            WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
+            WeatherAppViewModel.getForecastFromApi(lat, lon)
+        }
     }
 
 
@@ -237,8 +247,7 @@ class MainActivity : AppCompatActivity() {
 
                 //Update of textview and imageview
                 //call function here when its done
-            }
-            else{
+            } else {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Error: Cannot get the data from the internet. Please try again later.")
                 builder.setTitle("Error")
@@ -246,8 +255,6 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
             }
         }
-
-
 
 
         //actualize GUI after successful location and API retrieval
@@ -310,4 +317,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun getCityNameByCoordinates(lat: Double, lon: Double): String? {
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 10)
+
+        if (addresses.size > 0) {
+            for (adr in addresses) {
+                if (adr.locality != null && adr.locality.length > 0) {
+                    return adr.locality
+                }
+            }
+        }
+        return null
+    }
 }

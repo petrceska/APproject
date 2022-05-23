@@ -27,7 +27,8 @@ import java.util.*
 
 class WeatherAppViewModel : ViewModel() {
     private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
-//    private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
+
+    //    private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
     //558d117339f24712bb91f7afb0afe9df
     // for another api
     val API: String = "0cdd38b1b7a634430f4cb4b640ab6a26"
@@ -54,7 +55,6 @@ class WeatherAppViewModel : ViewModel() {
     fun getActualWeatherFromApi(lat: Number, lon: Number) {
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d(null, "APIcall........")
             //retrieve from API
             val response = weatherApiService.getDayWeather(apiKey, lat, lon)
 
@@ -149,18 +149,27 @@ class WeatherAppViewModel : ViewModel() {
             val response = weatherApiService.getForecast(apiKey, lat, lon)
 
             val arr = forecastApiToDb(response)
-            if (arr.size >= 6) { //TODO DB save
-//                if (forecastRepository.getForecastBy(forecast.id) == null) {
-//                    forecastRepository.insert(forecast)
-//                } else {
-//                    forecastRepository.update(forecast)
-//                }
+            if (arr.size >= 6) {
+                arr.forEach { forecast ->
+                    if (
+                        forecast.cityName != null &&
+                        forecast.date_time != null &&
+                        forecastRepository.getForecastByCityAndDate(
+                            forecast.cityName!!,
+                            forecast.date_time!!
+                        ) == null
+                    ) {
+                        forecastRepository.insert(forecast)
+                    } else {
+                        forecastRepository.update(forecast)
+                    }
+
+                }
 
                 // propagate the forecast for actual day
-                Log.d(null, arr.toString())
                 _forecast.postValue(arr.take(6).toTypedArray())
             } else {
-                //TODO wrong api response
+                // TODO wrong api response
 
             }
         }
@@ -182,6 +191,24 @@ class WeatherAppViewModel : ViewModel() {
                 if (forecastArr.size >= 6) {
                     // propagate the forecast for actual day
                     _forecast.postValue(forecastArr.take(6).toTypedArray())
+
+                    forecastArr.take(6).toTypedArray().forEach { forecast ->
+                        if (
+                            forecast.cityName != null &&
+                            forecast.date_time != null
+                        ) {
+                            if (
+                                forecastRepository.getForecastByCityAndDate(
+                                    forecast.cityName!!,
+                                    forecast.date_time!!
+                                ) == null
+                            ) {
+                                forecastRepository.insert(forecast)
+                            } else {
+                                forecastRepository.update(forecast)
+                            }
+                        }
+                    }
                 } else {
                     //TODO wrong api response
                 }
@@ -225,7 +252,6 @@ class WeatherAppViewModel : ViewModel() {
         if (apiResponse.body()?.data?.get(0) != null) {
             val data = apiResponse.body()?.data!![0]
             val weather = Weather().apply {
-                //TODO parse data from API object to DB objecct
                 stationId = data.station.toString()
                 actualized = data.actualized.toString()
                 countryCode = data.country_code
@@ -255,8 +281,7 @@ class WeatherAppViewModel : ViewModel() {
 
         apiResponse.body()?.data?.take(6)?.forEach { it ->
             val forecast = Forecast().apply {
-                //TODO parse data from API object to DB objecct
-
+                cityName = apiResponse.body()!!.city_name
                 date_time = it.datetime
                 temperature = it.temp?.toDouble()
                 temperatureMin = it.min_temp?.toDouble()
