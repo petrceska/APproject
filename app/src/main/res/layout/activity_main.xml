@@ -5,8 +5,9 @@
     android:id="@+id/hum_ID"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#246EE9"
+    android:background="@drawable/background_gradient"
     tools:context=".view.MainActivity">
+    //android:background="#246EE9"
 
     <Button
         android:id="@+id/btnFragment1"
