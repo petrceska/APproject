@@ -151,7 +151,6 @@ class WeatherAppViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             //retrieve from API
             val response = weatherApiService.getForecast(apiKey, lat, lon)
-
             val forecast = forecastApiToDb(response)
             if (forecast != null) {
                 if (forecastRepository.getForecastByStationId(forecast.id) == null) {
