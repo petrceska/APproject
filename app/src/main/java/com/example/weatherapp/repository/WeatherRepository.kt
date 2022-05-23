@@ -6,11 +6,11 @@ import com.example.weatherapp.database.WeatherDao
 
 class WeatherRepository(private val weatherDao: WeatherDao) {
 
-    fun getWeatherByStationId(id : Int) : Weather?{
+    fun getWeatherByStationId(id: String): Weather? {
         return weatherDao.getWeatherByStationId(id)
     }
 
-    fun getWeatherByCityName(cityName : String): Weather? {
+    fun getWeatherByCityName(cityName: String): Weather? {
         return weatherDao.getWeatherByCityName(cityName)
     }
 

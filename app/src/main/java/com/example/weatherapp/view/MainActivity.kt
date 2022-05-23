@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             commit() //first fragment is visible
         }
 
-        btnFragment1.setOnClickListener{
+        btnFragment1.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, firstFragment) //init fragment
                 addToBackStack(null)
@@ -61,7 +61,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        btnFragment2.setOnClickListener{
+
+        btnFragment2.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.flFragment, secondFragment) //init fragment
                 addToBackStack(null)
@@ -69,27 +70,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        WeatherAppViewModel.weatherRepository = (application as WeatherApplication).weatherRepository
-        WeatherAppViewModel.forecastRepository = (application as WeatherApplication).forecastRepository
+        WeatherAppViewModel.weatherRepository =
+            (application as WeatherApplication).weatherRepository
+        WeatherAppViewModel.forecastRepository =
+            (application as WeatherApplication).forecastRepository
 
-        //Update weather based on actual location
+        // initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //TODO call it whenever you need to update weather
         if (firstRun) {
-            this.actualizeWeatherBasedOnLocation()
             setObserver()
-            Log.i(null, "first run = true")
+            //Update weather based on actual location
+            this.actualizeWeatherBasedOnLocation()
             firstRun = false
         }
-        Log.i(null, "onc")
     }
 
 
     private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true) {
-        // initialize FusedLocationProviderClient
-        Log.i(null, "1")
-
         // check permissions of for retrieving location
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -162,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
-        Log.i(null, lat.toString() + lon.toString())
+        Log.d(null, lat.toString() + lon.toString())
     }
 
 
@@ -175,7 +174,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun setObserver(){
+    private fun setObserver() {
         //actualize GUI after successful location and API retrieval
         WeatherAppViewModel.weather.observe(this) { weather ->
             if (weather != null) {
@@ -210,7 +209,7 @@ class MainActivity : AppCompatActivity() {
                 //Location_ID.text = weather.cityName.toString()
                 //temp_ID.text = weather.temperature.toString()
                 //Log.i(null, weather.cityName.toString())
-                Log.i(null, weather.temperature.toString()+ "°")
+                Log.i(null, weather.temperature.toString() + "°")
             }
         }
     }

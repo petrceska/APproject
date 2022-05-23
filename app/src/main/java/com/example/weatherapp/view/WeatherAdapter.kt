@@ -5,10 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.database.Weather
 import kotlinx.android.synthetic.main.city_view.view.*
 
 
-class cityAdapter (var citys: List <City>) : RecyclerView.Adapter<cityAdapter.CityViewHolder> ()
+class WeatherAdapter (var citys: List <Weather>) : RecyclerView.Adapter<WeatherAdapter.CityViewHolder> ()
 {
     inner class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -22,10 +23,10 @@ class cityAdapter (var citys: List <City>) : RecyclerView.Adapter<cityAdapter.Ci
     {
         //Set view here
         holder.itemView.apply {
-            temp_view.text = citys[position].temp.toString()
-            city_View.text = citys[position].city
-            country_View.text = citys[position].country
-            wind_View.text = citys[position].wind.toString()
+            temp_view.text = citys[position].temperature.toString()
+            city_View.text = citys[position].cityName
+            country_View.text = citys[position].countryCode
+            wind_View.text = citys[position].windSpeed.toString()
             humidity_View.text = citys[position].humidity.toString()
             //image_view.
 

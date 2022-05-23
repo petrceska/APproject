@@ -1,6 +1,6 @@
 package com.example.weatherapp.view
 
-class City (
+class City(
 
     var temp: Int,
     var city: String,
@@ -9,4 +9,4 @@ class City (
     var wind: Double
     // var imageview
 
-    )
+)

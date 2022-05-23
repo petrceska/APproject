@@ -6,10 +6,10 @@ import androidx.room.*
 interface WeatherDao {
 
     @Query("SELECT * FROM weather where stationId = :stationId")
-    fun getWeatherByStationId(stationId : Int): Weather?
+    fun getWeatherByStationId(stationId: String): Weather?
 
     @Query("SELECT * FROM weather where cityName = :cityName")
-    fun getWeatherByCityName(cityName : String): Weather?
+    fun getWeatherByCityName(cityName: String): Weather?
 
     @Update
     fun update(weather: Weather): Int

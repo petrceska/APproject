@@ -2,6 +2,7 @@ package com.example.weatherapp.viewmodel
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,6 +28,7 @@ import java.util.*
 class WeatherAppViewModel : ViewModel() {
     //private var apiKey = "6b683d819fb44284a3a3cc2ec0b5b434"
     private var apiKey = "50b06584d76f4d10b8e48182c4aa07b9"
+
     // for another api
     val API: String = "0cdd38b1b7a634430f4cb4b640ab6a26"
 
@@ -45,11 +47,15 @@ class WeatherAppViewModel : ViewModel() {
     val forecast: LiveData<Forecast>
         get() = _forecast
 
+    private val _weatherList = MutableLiveData<List<Weather>>()
+    val weatherList: LiveData<List<Weather>>
+        get() = _weatherList
+
     fun getActualWeatherFromApi(lat: Number, lon: Number) {
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             while (running) {
-
+                Log.d(null, "APIcall........")
                 //retrieve from API
                 val response = weatherApiService.getDayWeather(apiKey, lat, lon)
 
@@ -63,14 +69,16 @@ class WeatherAppViewModel : ViewModel() {
 
                     // propagate the weather for actual day
                     _weather.postValue(weather)
+                    running = false
                 } else {
                     //TODO wrong api response
-                    var response:String?
-                    try{
-                        response = URL("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
-                            Charsets.UTF_8
-                        )
-                    }catch (e: Exception){
+                    var response: String?
+                    try {
+                        response =
+                            URL("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
+                                Charsets.UTF_8
+                            )
+                    } catch (e: Exception) {
                         val builder = AlertDialog.Builder(MainActivity())
                         builder.setMessage("Error: Cannot get the data from the internet. Please try again later.")
                         builder.setTitle("Error")
@@ -86,15 +94,18 @@ class WeatherAppViewModel : ViewModel() {
 
                     val city_name = jsonObject.getString("name")
                     val country_code = sys.getString("country")
-                    val location_display = city_name+", "+country_code
+                    val location_display = city_name + ", " + country_code
                     val weatherDescription = weather.getString("description")
 
                     val temperature_api = main.getString("temp")
                     val wind_speed = wind.getString("speed")
-                    val hum = main.getString("humidity")+" %"
+                    val hum = main.getString("humidity") + " %"
 
-                    val updatedAt:Long = jsonObject.getLong("dt")
-                    val updatedAtText = "Updated at: "+ SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt*1000))
+                    val updatedAt: Long = jsonObject.getLong("dt")
+                    val updatedAtText = "Updated at: " + SimpleDateFormat(
+                        "dd/MM/yyyy hh:mm a",
+                        Locale.ENGLISH
+                    ).format(Date(updatedAt * 1000))
 
                     val weather_return = Weather().apply {
                         //TODO parse data from API object to DB objecct
@@ -117,10 +128,11 @@ class WeatherAppViewModel : ViewModel() {
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             while (running) {
-                if (weatherRepository.getWeatherByCityName(cityName) != null) {
+                val dbWeather = weatherRepository.getWeatherByCityName(cityName)
+                if (dbWeather != null) {
                     // propagate the weather for actual day
-                    _weather.postValue(weatherRepository.getWeatherByCityName(cityName))
-
+                    _weather.postValue(dbWeather)
+                    running = false
                 } else {
                     //retrieve from API
                     val response = weatherApiService.getDayWeatherByCity(apiKey, cityName)
@@ -131,6 +143,7 @@ class WeatherAppViewModel : ViewModel() {
 
                         // propagate the weather for actual day
                         _weather.postValue(weather)
+                        running = false
                     } else {
                         //TODO wrong api response
 
@@ -140,7 +153,7 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
-    fun getActualForecastFromApi(lat: Number, lon: Number) {
+    fun getForecastFromApi(lat: Number, lon: Number) {
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             while (running) {
@@ -160,12 +173,13 @@ class WeatherAppViewModel : ViewModel() {
                     _forecast.postValue(forecast)
                 } else {
                     //TODO wrong api response
-                    var response:String?
-                    try{
-                        response = URL("https://api.openweathermap.org/data/2.5/forecast/daily?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
-                            Charsets.UTF_8
-                        )
-                    }catch (e: Exception){
+                    var response: String?
+                    try {
+                        response =
+                            URL("https://api.openweathermap.org/data/2.5/forecast/daily?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
+                                Charsets.UTF_8
+                            )
+                    } catch (e: Exception) {
                         response = null
                     }
                     val jsonObject = JSONObject(response)
@@ -175,15 +189,18 @@ class WeatherAppViewModel : ViewModel() {
 
                     val city_name = city.getString("name")
                     val country_code = city.getString("country")
-                    val location_display = city_name+", "+country_code
+                    val location_display = city_name + ", " + country_code
                     val weatherDescription = weather_list.getString("description")
 
                     val temperature_api = list.getJSONObject("temp").getDouble("day")
                     val wind_speed = list.getString("speed")
-                    val hum = list.getString("humidity")+" %"
+                    val hum = list.getString("humidity") + " %"
 
-                    val updatedAt:Long = jsonObject.getLong("dt")
-                    val updatedAtText = "Updated at: "+ SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date(updatedAt*1000))
+                    val updatedAt: Long = jsonObject.getLong("dt")
+                    val updatedAtText = "Updated at: " + SimpleDateFormat(
+                        "dd/MM/yyyy hh:mm a",
+                        Locale.ENGLISH
+                    ).format(Date(updatedAt * 1000))
 
                     val forecast_return = Forecast().apply {
                         //TODO parse data from API object to DB objecct
@@ -227,14 +244,51 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
+    fun setWeatherList(cityNames: Array<String>) {
+        val weatherList = mutableListOf<Weather>()
+
+        // Launch coroutine in viewModelScope
+        viewModelScope.launch(Dispatchers.IO) {
+            while (running) {
+                Log.d(null, "launch foreach")
+                cityNames.forEach { cityName ->
+                    Log.d(null, "for: $cityName")
+
+                    val dbWeather = weatherRepository.getWeatherByCityName(cityName)
+                    if (dbWeather != null) {
+                        Log.d(null, "DBcall------------ $cityName")
+                        weatherList.add(dbWeather)
+                    } else {
+                        //retrieve from API
+                        val response = weatherApiService.getDayWeatherByCity(apiKey, cityName)
+                        Log.d(null, "APIcall------------ $cityName")
+                        val apiWeather = weatherApiToDb(response)
+                        if (apiWeather != null) {
+                            Log.d(null, "API OK response------------ $cityName")
+                            weatherList.add(apiWeather)
+
+                            if (weatherRepository.getWeatherByStationId(apiWeather.stationId) == null) {
+                                weatherRepository.insert(apiWeather)
+                            } else {
+                                weatherRepository.update(apiWeather)
+                            }
+
+                        }
+                    }
+                }
+                // propagate the weather for actual day
+                _weatherList.postValue(weatherList)
+                running = false
+            }
+        }
+    }
 
     private fun weatherApiToDb(apiResponse: Response<ApiWeather>): Weather? {
         if (apiResponse.body()?.data?.get(0) != null) {
             val data = apiResponse.body()?.data!![0]
             val weather = Weather().apply {
                 //TODO parse data from API object to DB objecct
-
-                stationId = data.id
+                stationId = data.station.toString()
                 actualized = data.actualized.toString()
                 countryCode = data.country_code
                 cityName = data.city_name
@@ -257,7 +311,7 @@ class WeatherAppViewModel : ViewModel() {
         if (apiResponse.body()?.data?.get(0) != null) {
             val data = apiResponse.body()?.data!![0]
             val forecast = Forecast().apply {
-            //TODO parse data from API object to DB objecct
+                //TODO parse data from API object to DB objecct
                 temperature = data.temp?.toDouble()
                 temperatureMin = data.min_temp?.toDouble()
                 temperatureMax = data.max_temp?.toDouble()
