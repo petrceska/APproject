@@ -30,7 +30,6 @@ class SecondFragment(vm: WeatherAppViewModel) : Fragment(R.layout.fragment_secon
         setObserver()
 
         recyclerview_id.apply {
-            Log.d(null, "inApply----")
             // set a LinearLayoutManager to handle Android
             // RecyclerView behavior
             layoutManager = GridLayoutManager(this@SecondFragment.context, 2)
@@ -62,12 +61,14 @@ class SecondFragment(vm: WeatherAppViewModel) : Fragment(R.layout.fragment_secon
                 "Helsinki",
                 "Rio",
                 "Paris",
+                "Copenhagen",
                 "London",
                 "Brno",
                 "Odense",
                 "Madrid",
                 "Barcelona",
-                "Odense"
+                "Odense",
+
             )
         )
     }

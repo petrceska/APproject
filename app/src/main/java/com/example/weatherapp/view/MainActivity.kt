@@ -91,6 +91,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnReload.setOnClickListener {
+            this.actualizeWeatherBasedOnLocation(true, true)
+        }
+
         // initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -104,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true, databaseCall: Boolean = true) {
+    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true, reloadAll: Boolean = false) {
         // check permissions of for retrieving location
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -138,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                         val lon = actLoc.longitude
 
                         // successfully obtained location -> actualize weather
-                        updateWeather(lat, lon, databaseCall)
+                        updateWeather(lat, lon, reloadAll)
 
                     }
                 }
@@ -151,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                         val lon = lastLoc.longitude
 
                         // successfully obtained location -> actualize weather
-                        updateWeather(lat, lon, databaseCall)
+                        updateWeather(lat, lon, reloadAll)
 
                     } else {
                         // retrieve actual location
@@ -164,7 +168,7 @@ class MainActivity : AppCompatActivity() {
                                 val lon = actLoc.longitude
 
                                 // successfully obtained location -> actualize weather
-                                updateWeather(lat, lon, databaseCall)
+                                updateWeather(lat, lon, reloadAll)
 
                             }
                         }
@@ -175,17 +179,39 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun updateWeather(lat: Number, lon: Number, databaseCall : Boolean = true) {
-        var city = getCityNameByCoordinates(lat.toDouble(), lon.toDouble())
-        if (city != null && databaseCall) {
-            Log.i(null, "beru DB")
-            WeatherAppViewModel.getActualWeatherPreferablyDb(city)
-            WeatherAppViewModel.getForecastPreferablyDb(city)
-        }else{
-            Log.i(null, "beru API")
+    private fun updateWeather(lat: Number, lon: Number, reloadAll : Boolean = false) {
+        if (reloadAll){
             WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
             WeatherAppViewModel.getForecastFromApi(lat, lon)
+            WeatherAppViewModel.setWeatherList(
+                arrayOf(
+                    "Prague",
+                    "Oslo",
+                    "Helsinki",
+                    "Rio",
+                    "Paris",
+                    "Copenhagen",
+                    "London",
+                    "Brno",
+                    "Odense",
+                    "Madrid",
+                    "Barcelona",
+                    "Odense",
+
+                    )
+            )
+        }else {
+            var city = getCityNameByCoordinates(lat.toDouble(), lon.toDouble())
+
+            if (city != null) {
+                WeatherAppViewModel.getActualWeatherPreferablyDb(city)
+                WeatherAppViewModel.getForecastPreferablyDb(city)
+            } else {
+                WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
+                WeatherAppViewModel.getForecastFromApi(lat, lon)
+            }
         }
+
     }
 
 
@@ -209,7 +235,6 @@ class MainActivity : AppCompatActivity() {
                 var loc = Locale("", weather.countryCode.toString())
                 //var loc = Locale("", "DK")
                 var countryName = loc.displayCountry
-                Log.i(null, countryName.toString())
                 var location_message = weather.cityName.toString() + ", " + countryName
                 if (countryName == "NULL") {
                     location_message = weather.cityName.toString()
@@ -259,40 +284,34 @@ class MainActivity : AppCompatActivity() {
 
         //actualize GUI after successful location and API retrieval
         WeatherAppViewModel.forecast.observe(this) { forecast ->
-            if (forecast != null) {
-                Log.d(null, "BB sees you")
-                //var
+            if (forecast.size >= 6) {
 
+                //Updates forecast days
+                day_ID1.text = forecast[0].date_time.toString().drop(5)
+                day_ID2.text = forecast[1].date_time.toString().drop(5)
+                day_ID3.text = forecast[2].date_time.toString().drop(5)
+                day_ID4.text = forecast[3].date_time.toString().drop(5)
+                day_ID5.text = forecast[4].date_time.toString().drop(5)
+                day_ID6.text = forecast[5].date_time.toString().drop(5)
 
+                //Update forecast temp
+                temp_ID1.text = forecast[0].temperature.toString() + "°"
+                temp_ID2.text = forecast[1].temperature.toString() + "°"
+                temp_ID3.text = forecast[2].temperature.toString() + "°"
+                temp_ID4.text = forecast[3].temperature.toString() + "°"
+                temp_ID5.text = forecast[4].temperature.toString() + "°"
+                temp_ID6.text = forecast[5].temperature.toString() + "°"
+
+                //Update  imageview
+                forecast_ID1.setImageResource(getImgByCode(forecast[0].weatherCode))
+                forecast_ID2.setImageResource(getImgByCode(forecast[1].weatherCode))
+                forecast_ID3.setImageResource(getImgByCode(forecast[2].weatherCode))
+                forecast_ID4.setImageResource(getImgByCode(forecast[3].weatherCode))
+                forecast_ID5.setImageResource(getImgByCode(forecast[4].weatherCode))
+                forecast_ID6.setImageResource(getImgByCode(forecast[5].weatherCode))
+
+                //call function here when its done
             }
-            //var loc = Locale("", forecast. )
-
-            //Updates forecast days
-            day_ID1.text = forecast[0].date_time.toString().drop(5)
-            day_ID2.text = forecast[1].date_time.toString().drop(5)
-            day_ID3.text = forecast[2].date_time.toString().drop(5)
-            day_ID4.text = forecast[3].date_time.toString().drop(5)
-            day_ID5.text = forecast[4].date_time.toString().drop(5)
-            day_ID6.text = forecast[5].date_time.toString().drop(5)
-
-            //Update forecast temp
-            temp_ID1.text = forecast[0].temperature.toString() + "°"
-            temp_ID2.text = forecast[1].temperature.toString() + "°"
-            temp_ID3.text = forecast[2].temperature.toString() + "°"
-            temp_ID4.text = forecast[3].temperature.toString() + "°"
-            temp_ID5.text = forecast[4].temperature.toString() + "°"
-            temp_ID6.text = forecast[5].temperature.toString() + "°"
-
-            //Update  imageview
-            forecast_ID1.setImageResource(getImgByCode(forecast[0].weatherCode))
-            forecast_ID2.setImageResource(getImgByCode(forecast[1].weatherCode))
-            forecast_ID3.setImageResource(getImgByCode(forecast[2].weatherCode))
-            forecast_ID4.setImageResource(getImgByCode(forecast[3].weatherCode))
-            forecast_ID5.setImageResource(getImgByCode(forecast[4].weatherCode))
-            forecast_ID6.setImageResource(getImgByCode(forecast[5].weatherCode))
-
-            //call function here when its done
-
         }
     }
 
