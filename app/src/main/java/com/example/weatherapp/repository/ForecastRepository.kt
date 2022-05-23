@@ -14,6 +14,10 @@ class ForecastRepository(private val forecastDao: ForecastDao)  {
         return forecastDao.getForecastByCityName(cityName)
     }
 
+    fun getForecastByDate(date_time: String): Forecast? {
+        return forecastDao.getForecastByDate(date_time)
+    }
+
     fun insert(forecast: Forecast) {
         forecastDao.insert(forecast)
     }
