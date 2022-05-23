@@ -264,8 +264,8 @@ class MainActivity : AppCompatActivity() {
 
                 //Update forecast temp
                 temp_ID1.text = forecast[0].temperature.toString()
-                temp_ID2.text = forecast[1].temperature.toString()
-                temp_ID3.text = forecast[2].temperature.toString()
+                temp_ID2.text = forecast[0].temperature.toString()
+                temp_ID3.text = forecast[0].temperature.toString()
 
                 //Update  imageview
                 //forecast_ID1
