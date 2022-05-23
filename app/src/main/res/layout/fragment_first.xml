@@ -25,7 +25,7 @@
         android:id="@+id/temp_ID"
         android:layout_width="63dp"
         android:layout_height="66dp"
-        android:text="19"
+        android:text="....."
         android:textColor="@color/black"
         android:progress="25"
         android:textSize="50sp"
@@ -36,7 +36,7 @@
         android:id="@+id/Location_ID"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Location"
+        android:text="Loading...."
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Day and Date"
+        android:text="Loading...."
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/temp_ID" />
 
@@ -68,7 +68,7 @@
         android:id="@+id/description_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Sunshine"
+        android:hint="unknown"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -96,7 +96,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Day"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
         <ImageView
@@ -104,7 +104,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/drizzle" />
+            android:src="@drawable/unknown" />
 
 
         <TextView
@@ -113,7 +113,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Temp"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
 
@@ -139,7 +139,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Day"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
         <ImageView
@@ -147,7 +147,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/drizzle" />
+            android:src="@drawable/unknown" />
 
         <TextView
             android:id="@+id/temp_ID2"
@@ -155,7 +155,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Temp"
+            android:text="Loading...."
             android:textColor="@color/black" />
     </LinearLayout>
 
@@ -176,7 +176,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Day"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
         <ImageView
@@ -184,7 +184,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/drizzle" />
+            android:src="@drawable/unknown" />
 
 
         <TextView
@@ -193,7 +193,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Temp"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
 
@@ -218,7 +218,7 @@
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="78%\nHumidity"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
 
@@ -237,7 +237,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="11km\nVisibility"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
         <View
@@ -256,7 +256,7 @@
             android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="This is line 1\nWind"
+            android:text="Loading...."
             android:textColor="@color/black" />
 
 
@@ -271,6 +271,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
