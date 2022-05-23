@@ -12,42 +12,34 @@
 
     <TextView
         android:id="@+id/temp_view"
-        android:layout_width="54dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:hint="Temp"
         android:textAlignment="viewStart"
         android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/country_View"
-        android:layout_width="54dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:hint="Country"
-        android:textAlignment="viewStart"
-        android:textSize="13dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/city_View" />
-
-    <TextView
         android:id="@+id/city_View"
-        android:layout_width="70dp"
+        android:layout_width="100dp"
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
+
+        android:layout_marginTop="8dp"
         android:hint="City"
         android:textAlignment="viewStart"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp_view" />
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:src="@mipmap/ic_launcher"
@@ -56,25 +48,24 @@
 
     <TextView
         android:id="@+id/wind_View"
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="15dp"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="6dp"
         android:hint="Humidity"
         android:textAlignment="textStart"
         android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humidity_View" />
 
     <TextView
         android:id="@+id/humidity_View"
-        android:layout_width="60dp"
+        android:layout_width="100dp"
         android:layout_height="15dp"
-        android:hint="Wind"
         android:layout_marginStart="8dp"
+        android:hint="Wind"
         android:textAlignment="textStart"
         android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/wind_View"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_View" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
