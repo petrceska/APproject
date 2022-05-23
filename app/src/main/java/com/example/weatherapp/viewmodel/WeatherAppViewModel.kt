@@ -146,7 +146,7 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
-    fun getForecastFromApi(lat: Number, lon: Number) {
+    fun getForecastFromApi(lat: Number, lon: Number) { //TODO repair
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             //retrieve from API
@@ -208,7 +208,7 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
-    fun getForecastPreferablyDb(cityName: String) {
+    fun getForecastPreferablyDb(cityName: String) { //TODO repair
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             if (forecastRepository.getForecastByCityName(cityName) != null) {
