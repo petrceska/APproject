@@ -32,7 +32,10 @@ class WeatherAdapter (var citys: List <Weather>) : RecyclerView.Adapter<WeatherA
             city_View.text = citys[position].cityName + ", " + citys[position].countryCode
             //country_View.text = citys[position].countryCode
             wind_View.text = citys[position].windSpeed.toString() + " km/h"
-            humidity_View.text = citys[position].humidity.toString() + " % "
+            humidity_View.text = citys[position].humidity.toString() + " % Humidity "
+            sunrise_view.text = citys[position].sunrise.toString()
+            sunset_view.text = citys[position].sunset.toString()
+
             when(citys[position].weatherCode?.toInt()) {
                 202,232 -> image_view.setImageResource(R.drawable.thunderstorm_heavy_rain)
                 201,231 -> image_view.setImageResource(R.drawable.thunderstorm_rain)
