@@ -226,14 +226,14 @@ class MainActivity : AppCompatActivity() {
                 //var loc = Locale("", forecast. )
 
                 //Updates forecast days
-                day_ID1.text = forecast.date_time.toString()
-                day_ID2.text = forecast.date_time.toString()
-                day_ID3.text = forecast.date_time.toString()
+                day_ID1.text = forecast[0].date_time.toString()
+                day_ID2.text = forecast[1].date_time.toString()
+                day_ID3.text = forecast[2].date_time.toString()
 
                 //Update forecast temp
-                temp_ID1.text = forecast.temperature.toString()
-                temp_ID2.text = forecast.temperature.toString()
-                temp_ID3.text = forecast.temperature.toString()
+                temp_ID1.text = forecast[0].temperature.toString()
+                temp_ID2.text = forecast[1].temperature.toString()
+                temp_ID3.text = forecast[2].temperature.toString()
 
                 //Update  imageview
                 //forecast_ID1
