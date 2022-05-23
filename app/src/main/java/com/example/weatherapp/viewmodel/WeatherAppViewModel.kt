@@ -70,7 +70,6 @@ class WeatherAppViewModel : ViewModel() {
                 // propagate the weather for actual day
                 _weather.postValue(weather)
             } else {
-                //TODO wrong api response
                 var response: String?
                 try {
                     response =
@@ -102,7 +101,6 @@ class WeatherAppViewModel : ViewModel() {
                 ).format(Date(updatedAt * 1000))
 
                 val weather_return = Weather().apply {
-                    //TODO parse data from API object to DB objecct
 
                     countryCode = country_code
                     cityName = city_name
@@ -134,9 +132,6 @@ class WeatherAppViewModel : ViewModel() {
 
                     // propagate the weather for actual day
                     _weather.postValue(weather)
-                } else {
-                    //TODO wrong api response
-
                 }
             }
         }
@@ -172,9 +167,6 @@ class WeatherAppViewModel : ViewModel() {
 
                 // propagate the forecast for actual day
                 _forecast.postValue(arr.take(6).toTypedArray())
-            } else {
-                // TODO wrong api response
-
             }
         }
     }
@@ -213,8 +205,6 @@ class WeatherAppViewModel : ViewModel() {
                             }
                         }
                     }
-                } else {
-                    //TODO wrong api response
                 }
             }
 

@@ -64,7 +64,4 @@ class Forecast {
     @JvmField
     var weatherCode: Int? = null
 
-
-    //TODO rewrite variable types so it actually matches with data you will get from API
-
 }

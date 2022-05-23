@@ -98,13 +98,10 @@ class MainActivity : AppCompatActivity() {
         // initialize FusedLocationProviderClient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        //TODO call it whenever you need to update weather
-        if (firstRun) {
-            setObserver()
-            //Update weather based on actual location
-            this.actualizeWeatherBasedOnLocation(false, false)
-            firstRun = false
-        }
+        setObserver()
+        //Update weather based on actual location
+        this.actualizeWeatherBasedOnLocation(false, false)
+
     }
 
 
@@ -233,7 +230,6 @@ class MainActivity : AppCompatActivity() {
             if (weather != null) {
 
                 //actualize GUI
-                //TODO here you can actualize GUI of the app
                 //show the location
                 var loc = Locale("", weather.countryCode.toString())
                 //var loc = Locale("", "DK")
