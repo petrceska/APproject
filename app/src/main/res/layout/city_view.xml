@@ -72,7 +72,7 @@
         android:layout_height="15dp"
         android:hint="Wind"
         android:layout_marginStart="8dp"
-        android:textAlignment="center"
+        android:textAlignment="sta"
         android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/wind_View"
         app:layout_constraintStart_toStartOf="parent" />
