@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/city_View"
-        android:layout_width="54dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:hint="City"
