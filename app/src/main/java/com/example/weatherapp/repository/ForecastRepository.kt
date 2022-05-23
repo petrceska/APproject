@@ -10,7 +10,7 @@ class ForecastRepository(private val forecastDao: ForecastDao)  {
     }
 
 
-    fun getForecastByCityName(cityName: String): Forecast? {
+    fun getForecastByCityName(cityName: String): Array<Forecast> {
         return forecastDao.getForecastByCityName(cityName)
     }
 

@@ -9,7 +9,7 @@ interface ForecastDao {
     fun getForecastById(id : Int): Forecast?
 
     @Query("SELECT * FROM forecast where cityName = :cityName")
-    fun getForecastByCityName(cityName : String): Forecast?
+    fun getForecastByCityName(cityName : String): Array<Forecast>
 
     @Update
     fun update(forecast: Forecast): Int

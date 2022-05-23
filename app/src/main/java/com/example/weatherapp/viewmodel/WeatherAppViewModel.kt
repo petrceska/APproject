@@ -43,8 +43,8 @@ class WeatherAppViewModel : ViewModel() {
     val weather: LiveData<Weather>
         get() = _weather
 
-    private val _forecast = MutableLiveData<Forecast>()
-    val forecast: LiveData<Forecast>
+    private val _forecast = MutableLiveData<Array<Forecast>>()
+    val forecast: LiveData<Array<Forecast>>
         get() = _forecast
 
     private val _weatherList = MutableLiveData<List<Weather>>()
@@ -292,29 +292,28 @@ class WeatherAppViewModel : ViewModel() {
         return null
     }
 
-    private fun forecastApiToDb(apiResponse: Response<ApiForecast>): Forecast? {
-        if (apiResponse.body()?.data?.get(0) != null) {
-            val data = apiResponse.body()?.data!![0]
-            val forecast = Forecast().apply {
-                //TODO parse data from API object to DB objecct
+    private fun forecastApiToDb(apiResponse: Response<ApiForecast>): Array<Forecast> {
+        val forecastArray = emptyArray<Forecast>()
+        apiResponse.body()?.data?.forEach { it->
+                val forecast = Forecast().apply {
+                    //TODO parse data from API object to DB objecct
 
-                date_time = data.datetime
-                temperature = data.temp?.toDouble()
-                temperatureMin = data.min_temp?.toDouble()
-                temperatureMax = data.max_temp?.toDouble()
-                humidity = data.rh?.toInt()
-                clouds = data.clouds?.toInt()
-                sunrise = data.sunrise_ts?.toString()
-                sunset = data.sunset_ts?.toString()
-                uv = data.uv?.toInt()
-                windSpeed = data.wind_spd?.toDouble()
-                windDirection = data.wind_dir?.toInt()
-                precipitation = data.precip?.toInt()
-                precipitationProbability = data.pop?.toInt()
-
+                    date_time = it.datetime
+                    temperature = it.temp?.toDouble()
+                    temperatureMin = it.min_temp?.toDouble()
+                    temperatureMax = it.max_temp?.toDouble()
+                    humidity = it.rh?.toInt()
+                    clouds = it.clouds?.toInt()
+                    sunrise = it.sunrise_ts?.toString()
+                    sunset = it.sunset_ts?.toString()
+                    uv = it.uv?.toInt()
+                    windSpeed = it.wind_spd?.toDouble()
+                    windDirection = it.wind_dir?.toInt()
+                    precipitation = it.precip?.toInt()
+                    precipitationProbability = it.pop?.toInt()
             }
-            return forecast
+            forecastArray.plusElement(forecast)
         }
-        return null
+        return forecastArray
     }
 }
