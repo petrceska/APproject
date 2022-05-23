@@ -161,6 +161,10 @@ class WeatherAppViewModel : ViewModel() {
                     ) {
                         forecastRepository.insert(forecast)
                     } else {
+                        var f = forecastRepository.getForecastByCityAndDate(forecast.cityName!!, forecast.date_time!!)
+                        if (f != null) {
+                            forecast.id = f.id
+                        }
                         forecastRepository.update(forecast)
                     }
 
@@ -217,7 +221,7 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
-    fun setWeatherList(cityNames: Array<String>) {
+    fun setWeatherList(cityNames: Array<String>, reloadAll : Boolean = false) {
         val weatherList = mutableListOf<Weather>()
 
         // Launch coroutine in viewModelScope
@@ -225,7 +229,7 @@ class WeatherAppViewModel : ViewModel() {
             cityNames.forEach { cityName ->
 
                 val dbWeather = weatherRepository.getWeatherByCityName(cityName)
-                if (dbWeather != null) {
+                if (dbWeather != null && !reloadAll) {
                     weatherList.add(dbWeather)
                 } else {
                     //retrieve from API
@@ -281,6 +285,8 @@ class WeatherAppViewModel : ViewModel() {
 
         apiResponse.body()?.data?.take(6)?.forEach { it ->
             val forecast = Forecast().apply {
+                actualized = Calendar.getInstance().getTime().toString()
+                countryName = apiResponse.body()!!.country_code
                 cityName = apiResponse.body()!!.city_name
                 date_time = it.datetime
                 temperature = it.temp?.toDouble()

@@ -102,13 +102,16 @@ class MainActivity : AppCompatActivity() {
         if (firstRun) {
             setObserver()
             //Update weather based on actual location
-            this.actualizeWeatherBasedOnLocation()
+            this.actualizeWeatherBasedOnLocation(false, false)
             firstRun = false
         }
     }
 
 
-    private fun actualizeWeatherBasedOnLocation(actualizeLocation: Boolean = true, reloadAll: Boolean = false) {
+    private fun actualizeWeatherBasedOnLocation(
+        actualizeLocation: Boolean = true,
+        reloadAll: Boolean = false
+    ) {
         // check permissions of for retrieving location
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -179,8 +182,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun updateWeather(lat: Number, lon: Number, reloadAll : Boolean = false) {
-        if (reloadAll){
+    private fun updateWeather(lat: Number, lon: Number, reloadAll: Boolean = false) {
+        if (reloadAll) {
             WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
             WeatherAppViewModel.getForecastFromApi(lat, lon)
             WeatherAppViewModel.setWeatherList(
@@ -198,9 +201,9 @@ class MainActivity : AppCompatActivity() {
                     "Barcelona",
                     "Odense",
 
-                    )
+                    ), true
             )
-        }else {
+        } else {
             var city = getCityNameByCoordinates(lat.toDouble(), lon.toDouble())
 
             if (city != null) {
