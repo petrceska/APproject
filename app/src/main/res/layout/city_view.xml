@@ -61,7 +61,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="6dp"
         android:hint="Humidity"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -72,7 +72,7 @@
         android:layout_height="15dp"
         android:hint="Wind"
         android:layout_marginStart="8dp"
-        android:textAlignment="sta"
+        android:textAlignment="textStart"
         android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/wind_View"
         app:layout_constraintStart_toStartOf="parent" />
