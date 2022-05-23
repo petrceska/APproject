@@ -5,4 +5,6 @@ import com.example.weatherapp.R
 
 class FirstFragment : Fragment(R.layout.fragment_first) {
 
+
+
 }

@@ -189,9 +189,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 //Date update view
-                val calendar: Calendar = Calendar.getInstance()
-                val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-                val dateTime = simpleDateFormat.format(calendar.time)
+                //val calendar: Calendar = Calendar.getInstance()
+                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
+                //val dateTime = simpleDateFormat.format(calendar.time)
 
                 //Date update view
                 date_ID.text = weather.actualized.toString()
@@ -224,17 +224,21 @@ class MainActivity : AppCompatActivity() {
         WeatherAppViewModel.forecast.observe(this) { forecast ->
             if (forecast != null) {
 
+                //var
+
+
+            }
                 //var loc = Locale("", forecast. )
 
                 //Updates forecast days
-                //date_ID1.text = forecast.
-                //date_ID2.text = forecast.
-                //date_ID3.text = forecast.
+                day_ID1.text = forecast.date_time.toString()
+                day_ID2.text = forecast.date_time.toString()
+                day_ID3.text = forecast.date_time.toString()
 
                 //Update forecast temp
-                //temp_ID1.text = forecast.s
-                //temp_ID2.text = forecast.
-                //temp_ID3.text = forecast.
+                temp_ID1.text = forecast.temperature.toString()
+                temp_ID2.text = forecast.temperature.toString()
+                temp_ID3.text = forecast.temperature.toString()
 
                 //Update  imageview
                 //forecast_ID1
@@ -243,8 +247,6 @@ class MainActivity : AppCompatActivity() {
 
                 //call function here when its done
 
-
-            }
         }
     }
 }
