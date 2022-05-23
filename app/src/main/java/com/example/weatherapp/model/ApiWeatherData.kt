@@ -1,5 +1,6 @@
 package com.example.weatherapp.model
 
+import android.util.EventLogTags
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
@@ -47,9 +48,5 @@ class ApiWeatherData {
         var icon : String? = null
         var code : String? = null
         var description : String? = null
-
-        fun test(): String?{
-            return description
-        }
     }
 }

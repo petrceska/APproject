@@ -3,13 +3,19 @@ package com.example.weatherapp.view
 //Imported for date
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NavUtils
+import androidx.core.view.MotionEventCompat
 import com.example.weatherapp.R
 import com.example.weatherapp.WeatherApplication
 import com.example.weatherapp.viewmodel.WeatherAppViewModel
@@ -21,6 +27,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_first.*
+import org.json.JSONObject
+import kotlin.math.abs
 
 
 class MainActivity : AppCompatActivity() {
@@ -206,6 +214,30 @@ class MainActivity : AppCompatActivity() {
                 //Wind Update
                 wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
 
+                //Description Update
+                description_ID.text = weather.weatherDescription.toString()
+
+                //Logo Update
+                when(weather.weatherCode?.toInt()) {
+                    202,232 -> imageView.setImageResource(R.drawable.thunderstorm_heavy_rain)
+                    201,231 -> imageView.setImageResource(R.drawable.thunderstorm_rain)
+                    200,230 -> imageView.setImageResource(R.drawable.thunderstormlightrain)
+                    233 -> imageView.setImageResource(R.drawable.thunderstorm_hail)
+                    300,301,302,500,501,502,511,520,521,522 -> imageView.setImageResource(R.drawable.rain)
+                    600 -> imageView.setImageResource(R.drawable.lightsnow)
+                    601,602 -> imageView.setImageResource(R.drawable.snow)
+                    610 -> imageView.setImageResource(R.drawable.mixsnowandrain)
+                    611,612 -> imageView.setImageResource(R.drawable.sleet)
+                    621,622,623 -> imageView.setImageResource(R.drawable.snowshower)
+                    700,711,721,731,741,751 -> imageView.setImageResource(R.drawable.mist)
+                    800 -> imageView.setImageResource(R.drawable.clearsky)
+                    801,802 -> imageView.setImageResource(R.drawable.fewclouds)
+                    803 -> imageView.setImageResource(R.drawable.brokenclouds)
+                    804 -> imageView.setImageResource(R.drawable.overcastclouds)
+                    else -> imageView.setImageResource(R.drawable.unknown)
+                }
+                //imageView.setImageResource()
+
                 //Update of textview and imageview
                 //call function here when its done
 
@@ -226,14 +258,14 @@ class MainActivity : AppCompatActivity() {
                 //var loc = Locale("", forecast. )
 
                 //Updates forecast days
-                day_ID1.text = forecast.date_time.toString()
-                day_ID2.text = forecast.date_time.toString()
-                day_ID3.text = forecast.date_time.toString()
-
-                //Update forecast temp
-                temp_ID1.text = forecast.temperature.toString()
-                temp_ID2.text = forecast.temperature.toString()
-                temp_ID3.text = forecast.temperature.toString()
+//                day_ID1.text = forecast.date_time.toString()
+//                day_ID2.text = forecast.date_time.toString()
+//                day_ID3.text = forecast.date_time.toString()
+//
+//                //Update forecast temp
+//                temp_ID1.text = forecast.temperature.toString()
+//                temp_ID2.text = forecast.temperature.toString()
+//                temp_ID3.text = forecast.temperature.toString()
 
                 //Update  imageview
                 //forecast_ID1
@@ -242,6 +274,7 @@ class MainActivity : AppCompatActivity() {
 
                 //call function here when its done
 
+
+            }
         }
-    }
 }
