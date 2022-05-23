@@ -38,4 +38,9 @@ class ApiForecastData {
     var min_temp : Number? = null
     var clouds_mid : Number? = null
     var clouds_low : Number? = null
+    var weather = object {
+        var icon : String? = null
+        var code : String? = null
+        var description : String? = null
+    }
 }

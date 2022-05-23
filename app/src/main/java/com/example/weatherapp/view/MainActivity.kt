@@ -184,6 +184,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateWeather(lat: Number, lon: Number) {
         WeatherAppViewModel.getActualWeatherFromApi(lat, lon)
+        WeatherAppViewModel.getForecastFromApi(lat, lon)
         Log.d(null, lat.toString() + lon.toString())
     }
 
@@ -241,33 +242,13 @@ class MainActivity : AppCompatActivity() {
                 description_ID.text = weather.weatherDescription.toString()
 
                 //Logo Update
-                when(weather.weatherCode?.toInt()) {
-                    202,232 -> imageView.setImageResource(R.drawable.thunderstorm_heavy_rain)
-                    201,231 -> imageView.setImageResource(R.drawable.thunderstorm_rain)
-                    200,230 -> imageView.setImageResource(R.drawable.thunderstormlightrain)
-                    233 -> imageView.setImageResource(R.drawable.thunderstorm_hail)
-                    300,301,302,500,501,502,511,520,521,522 -> imageView.setImageResource(R.drawable.rain)
-                    600 -> imageView.setImageResource(R.drawable.lightsnow)
-                    601,602 -> imageView.setImageResource(R.drawable.snow)
-                    610 -> imageView.setImageResource(R.drawable.mixsnowandrain)
-                    611,612 -> imageView.setImageResource(R.drawable.sleet)
-                    621,622,623 -> imageView.setImageResource(R.drawable.snowshower)
-                    700,711,721,731,741,751 -> imageView.setImageResource(R.drawable.mist)
-                    800 -> imageView.setImageResource(R.drawable.clearsky)
-                    801,802 -> imageView.setImageResource(R.drawable.fewclouds)
-                    803 -> imageView.setImageResource(R.drawable.brokenclouds)
-                    804 -> imageView.setImageResource(R.drawable.overcastclouds)
-                    else -> imageView.setImageResource(R.drawable.unknown)
-                }
+                imageView.setImageResource(getImgByCode(weather.weatherCode))
                 //imageView.setImageResource()
 
                 //Update of textview and imageview
                 //call function here when its done
-
-
             }
         }
-    }
 
     private fun updateObserver() {
         //actualize GUI after successful location and API retrieval
@@ -340,32 +321,64 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setObserverForecast() {
         //actualize GUI after successful location and API retrieval
         WeatherAppViewModel.forecast.observe(this) { forecast ->
             if (forecast != null) {
-
+                Log.d(null, "BB sees you")
                 //var
+
+
             }
-                //var loc = Locale("", forecast. )
+            //var loc = Locale("", forecast. )
 
-                //Updates forecast days
-                //day_ID1.text = forecast[0].date_time.toString()
-                //day_ID2.text = forecast[1].date_time.toString()
-                //day_ID3.text = forecast[2].date_time.toString()
-//
-                ////Update forecast temp
-                //temp_ID1.text = forecast[0].temperature.toString()
-                //temp_ID2.text = forecast[0].temperature.toString()
-                //temp_ID3.text = forecast[0].temperature.toString()
+            //Updates forecast days
+            day_ID1.text = forecast[0].date_time.toString().drop(5)
+            day_ID2.text = forecast[1].date_time.toString().drop(5)
+            day_ID3.text = forecast[2].date_time.toString().drop(5)
+            day_ID4.text = forecast[3].date_time.toString().drop(5)
+            day_ID5.text = forecast[4].date_time.toString().drop(5)
+            day_ID6.text = forecast[5].date_time.toString().drop(5)
 
-                //Update  imageview
-                //forecast_ID1
-                //forecast_ID2
-                //forecast_ID3
+            //Update forecast temp
+            temp_ID1.text = forecast[0].temperature.toString()
+            temp_ID2.text = forecast[1].temperature.toString()
+            temp_ID3.text = forecast[2].temperature.toString()
+            temp_ID4.text = forecast[3].temperature.toString()
+            temp_ID5.text = forecast[4].temperature.toString()
+            temp_ID6.text = forecast[5].temperature.toString()
 
-                //call function here when its done
+            //Update  imageview
+            forecast_ID1.setImageResource(getImgByCode(forecast[0].weatherCode))
+            forecast_ID2.setImageResource(getImgByCode(forecast[1].weatherCode))
+            forecast_ID3.setImageResource(getImgByCode(forecast[2].weatherCode))
+            forecast_ID4.setImageResource(getImgByCode(forecast[3].weatherCode))
+            forecast_ID5.setImageResource(getImgByCode(forecast[4].weatherCode))
+            forecast_ID6.setImageResource(getImgByCode(forecast[5].weatherCode))
+
+            //call function here when its done
 
         }
     }
+
+    fun getImgByCode(code : Int?): Int {
+        when(code) {
+            202,232 -> return R.drawable.thunderstorm_heavy_rain
+            201,231 -> return R.drawable.thunderstorm_rain
+            200,230 -> return R.drawable.thunderstormlightrain
+            233 -> return R.drawable.thunderstorm_hail
+            300,301,302,500,501,502,511,520,521,522 -> return R.drawable.rain
+            600 -> return R.drawable.lightsnow
+            601,602 -> return R.drawable.snow
+            610 -> return R.drawable.mixsnowandrain
+            611,612 -> return R.drawable.sleet
+            621,622,623 -> return R.drawable.snowshower
+            700,711,721,731,741,751 -> return R.drawable.mist
+            800 -> return R.drawable.clearsky
+            801,802 -> return R.drawable.fewclouds
+            803 -> return R.drawable.brokenclouds
+            804 -> return R.drawable.overcastclouds
+            else -> return R.drawable.unknown
+        }
+    }
+
 }

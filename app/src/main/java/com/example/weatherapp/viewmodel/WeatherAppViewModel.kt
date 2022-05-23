@@ -146,112 +146,69 @@ class WeatherAppViewModel : ViewModel() {
         }
     }
 
-//    fun getForecastFromApi(lat: Number, lon: Number) { //TODO repair
-//        // Launch coroutine in viewModelScope
-//        viewModelScope.launch(Dispatchers.IO) {
-//            //retrieve from API
-//            val response = weatherApiService.getForecast(apiKey, lat, lon)
-//            val forecast = forecastApiToDb(response)
-//            if (forecast != null) {
-//                if (forecastRepository.getForecastByStationId(forecast.id) == null) {
+    fun getForecastFromApi(lat: Number, lon: Number) {
+        // Launch coroutine in viewModelScope
+        viewModelScope.launch(Dispatchers.IO) {
+            //retrieve from API
+            val response = weatherApiService.getForecast(apiKey, lat, lon)
+
+            val arr = forecastApiToDb(response)
+            if (arr.size >= 6) { //TODO DB save
+//                if (forecastRepository.getForecastBy(forecast.id) == null) {
 //                    forecastRepository.insert(forecast)
 //                } else {
 //                    forecastRepository.update(forecast)
 //                }
-//
-//                // propagate the forecast for actual day
-//                _forecast.postValue(forecast)
-//            } else {
-//                //TODO wrong api response
-//                var response: String?
-//                try {
-//                    response =
-//                        URL("https://api.openweathermap.org/data/2.5/forecast/daily?lat=$lat&lon=$lon&units=metric&appid=$API").readText(
-//                            Charsets.UTF_8
-//                        )
-//                } catch (e: Exception) {
-//                    response = null
-//                }
-//                val jsonObject = JSONObject(response)
-//                val city = jsonObject.getJSONObject("city")
-//                val list = jsonObject.getJSONArray("list").getJSONObject(0)
-//                val weather_list = list.getJSONArray("weather").getJSONObject(0)
-//
-//                val city_name = city.getString("name")
-//                val country_code = city.getString("country")
-//                val location_display = city_name + ", " + country_code
-//                val weatherDescription = weather_list.getString("description")
-//
-//                val temperature_api = list.getJSONObject("temp").getDouble("day")
-//                val wind_speed = list.getString("speed")
-//                val hum = list.getString("humidity") + " %"
-//
-//                val updatedAt: Long = jsonObject.getLong("dt")
-//                val updatedAtText = "Updated at: " + SimpleDateFormat(
-//                    "dd/MM/yyyy hh:mm a",
-//                    Locale.ENGLISH
-//                ).format(Date(updatedAt * 1000))
-//
-//                val forecast_return = Forecast().apply {
-//                    //TODO parse data from API object to DB objecct
-//
-//                    countryName = country_code
-//                    cityName = city_name
-//                    temperature = temperature_api.toDouble()
-//                    humidity = hum.toInt()
-//                    windSpeed = wind_speed.toDouble()
-//
-//                }
-//                forecastRepository.insert(forecast_return)
-//            }
-//        }
-//    }
 
-//    fun getForecastPreferablyDb(cityName: String) { //TODO repair
-//        // Launch coroutine in viewModelScope
-//        viewModelScope.launch(Dispatchers.IO) {
-//            if (forecastRepository.getForecastByCityName(cityName) != null) {
-//                // propagate the forecast for actual day
-//                _forecast.postValue(forecastRepository.getForecastByCityName(cityName))
-//
-//            } else {
-//                //retrieve from API
-//                val response = weatherApiService.getForecastByCity(apiKey, cityName)
-//
-//                val forecast = forecastApiToDb(response)
-//                if (forecast != null) {
-//                    forecastRepository.insert(forecast)
-//
-//                    // propagate the forecast for actual day
-//                    _forecast.postValue(forecast)
-//                } else {
-//                    //TODO wrong api response
-//                }
-//            }
-//
-//        }
-//    }
+                // propagate the forecast for actual day
+                Log.d(null, arr.toString())
+                _forecast.postValue(arr.take(6).toTypedArray())
+            } else {
+                //TODO wrong api response
+
+            }
+        }
+    }
+
+    fun getForecastPreferablyDb(cityName: String) {
+        // Launch coroutine in viewModelScope
+        viewModelScope.launch(Dispatchers.IO) {
+            val arr = forecastRepository.getForecastByCityName(cityName)
+            if (arr.size == 6) {
+                // propagate the forecast for actual day
+                _forecast.postValue(forecastRepository.getForecastByCityName(cityName))
+
+            } else {
+                //retrieve from API
+                val response = weatherApiService.getForecastByCity(apiKey, cityName)
+
+                val forecastArr = forecastApiToDb(response)
+                if (forecastArr.size >= 6) {
+                    // propagate the forecast for actual day
+                    _forecast.postValue(forecastArr.take(6).toTypedArray())
+                } else {
+                    //TODO wrong api response
+                }
+            }
+
+        }
+    }
 
     fun setWeatherList(cityNames: Array<String>) {
         val weatherList = mutableListOf<Weather>()
 
         // Launch coroutine in viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d(null, "launch foreach")
             cityNames.forEach { cityName ->
-                Log.d(null, "for: $cityName")
 
                 val dbWeather = weatherRepository.getWeatherByCityName(cityName)
                 if (dbWeather != null) {
-                    Log.d(null, "DBcall------------ $cityName")
                     weatherList.add(dbWeather)
                 } else {
                     //retrieve from API
                     val response = weatherApiService.getDayWeatherByCity(apiKey, cityName)
-                    Log.d(null, "APIcall------------ $cityName")
                     val apiWeather = weatherApiToDb(response)
                     if (apiWeather != null) {
-                        Log.d(null, "API OK response------------ $cityName")
                         weatherList.add(apiWeather)
 
                         if (weatherRepository.getWeatherByStationId(apiWeather.stationId) == null) {
@@ -286,10 +243,8 @@ class WeatherAppViewModel : ViewModel() {
                 windSpeed = data.wind_spd?.toDouble()
                 windDirection = data.wind_dir?.toInt()
                 val weatherDescription_string = data.weather.toString()
-                Log.i(null, weatherDescription_string)
                 weatherDescription = weatherDescription_string.substringAfter("description=").substringBefore('}')
-                weatherCode =
-                    weatherDescription_string.substringAfter("code=").substringBefore(',').toDouble()
+                weatherCode = weatherDescription_string.substringAfter("code=").substringBefore(',').toDouble().toInt()
 
             }
             return weather
@@ -298,27 +253,30 @@ class WeatherAppViewModel : ViewModel() {
     }
 
     private fun forecastApiToDb(apiResponse: Response<ApiForecast>): Array<Forecast> {
-        val forecastArray = emptyArray<Forecast>()
-        apiResponse.body()?.data?.forEach { it->
-                val forecast = Forecast().apply {
-                    //TODO parse data from API object to DB objecct
+        val forecastList = emptyList<Forecast>().toMutableList()
 
-                    date_time = it.datetime
-                    temperature = it.temp?.toDouble()
-                    temperatureMin = it.min_temp?.toDouble()
-                    temperatureMax = it.max_temp?.toDouble()
-                    humidity = it.rh?.toInt()
-                    clouds = it.clouds?.toInt()
-                    sunrise = it.sunrise_ts?.toString()
-                    sunset = it.sunset_ts?.toString()
-                    uv = it.uv?.toInt()
-                    windSpeed = it.wind_spd?.toDouble()
-                    windDirection = it.wind_dir?.toInt()
-                    precipitation = it.precip?.toInt()
-                    precipitationProbability = it.pop?.toInt()
+        apiResponse.body()?.data?.take(6)?.forEach { it->
+            val forecast = Forecast().apply {
+                //TODO parse data from API object to DB objecct
+
+                date_time = it.datetime
+                temperature = it.temp?.toDouble()
+                temperatureMin = it.min_temp?.toDouble()
+                temperatureMax = it.max_temp?.toDouble()
+                humidity = it.rh?.toInt()
+                clouds = it.clouds?.toInt()
+                sunrise = it.sunrise_ts?.toString()
+                sunset = it.sunset_ts?.toString()
+                uv = it.uv?.toInt()
+                windSpeed = it.wind_spd?.toDouble()
+                windDirection = it.wind_dir?.toInt()
+                precipitation = it.precip?.toInt()
+                precipitationProbability = it.pop?.toInt()
+                weatherCode = it.weather.toString().substringAfter("code=").substringBefore(',').toDouble().toInt()
+
             }
-            forecastArray.plusElement(forecast)
+            forecastList += forecast
         }
-        return forecastArray
+        return forecastList.toTypedArray()
     }
 }

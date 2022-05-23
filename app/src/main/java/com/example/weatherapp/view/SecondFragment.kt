@@ -58,9 +58,13 @@ class SecondFragment(vm: WeatherAppViewModel) : Fragment(R.layout.fragment_secon
         viewModel.setWeatherList(
             arrayOf(
                 "Prague",
+                "Oslo",
+                "Helsinki",
+                "Rio",
                 "Paris",
                 "London",
-                "Copenhagen",
+                "Brno",
+                "Odense",
                 "Madrid",
                 "Barcelona",
                 "Odense"

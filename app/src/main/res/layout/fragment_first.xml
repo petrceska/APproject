@@ -78,21 +78,145 @@
         />
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout8"
+        android:layout_width="170dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/roundstyle"
-
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout9"
+        >
+
+        <TextView
+            android:id="@+id/day_ID4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+        <ImageView
+            android:id="@+id/forecast_ID4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/unknown" />
+
+        <TextView
+            android:id="@+id/temp_ID4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundstyle"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/day_ID2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+        <ImageView
+            android:id="@+id/forecast_ID2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/unknown" />
+
+        <TextView
+            android:id="@+id/temp_ID2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:weightSum="3"
+
+        android:background="@drawable/roundstyle"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/day_ID6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+        <ImageView
+            android:id="@+id/forecast_ID6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/unknown" />
+
+        <TextView
+            android:id="@+id/temp_ID6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:background="@drawable/roundstyle"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/day_ID1"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -101,16 +225,16 @@
 
         <ImageView
             android:id="@+id/forecast_ID1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/unknown" />
 
 
         <TextView
             android:id="@+id/temp_ID1"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Loading...."
@@ -121,58 +245,19 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/roundstyle"
-
+        android:layout_marginStart="16dp"
         android:orientation="horizontal"
+        android:weightSum="3"
+        android:background="@drawable/roundstyle"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/day_ID2"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Loading...."
-            android:textColor="@color/black" />
-
-        <ImageView
-            android:id="@+id/forecast_ID2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:src="@drawable/unknown" />
-
-        <TextView
-            android:id="@+id/temp_ID2"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Loading...."
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/roundstyle"
-        android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/swipeHandlerView3">
-
-        <TextView
             android:id="@+id/day_ID3"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -181,16 +266,54 @@
 
         <ImageView
             android:id="@+id/forecast_ID3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/unknown" />
+
+        <TextView
+            android:id="@+id/temp_ID3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/roundstyle"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/day_ID5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Loading...."
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/forecast_ID5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/unknown" />
 
 
         <TextView
-            android:id="@+id/temp_ID3"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
+            android:id="@+id/temp_ID5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Loading...."
@@ -203,12 +326,14 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/roundstyle"
         android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/humidity_ID"
@@ -261,16 +386,5 @@
 
 
     </LinearLayout>
-
-    <com.example.weatherapp.view.CustomSwipeView
-        android:id="@+id/swipeHandlerView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

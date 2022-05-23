@@ -50,7 +50,7 @@ class Weather {
     var weatherDescription : String? = null
 
     @JvmField
-    var weatherCode : Double? = null
+    var weatherCode : Int? = null
 
     @JvmField
     var visibility : String? = null
