@@ -27,6 +27,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.city_view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.synthetic.main.fragment_first.*
@@ -246,76 +247,6 @@ class MainActivity : AppCompatActivity() {
 
                 //Update of textview and imageview
                 //call function here when its done
-            }
-        }
-
-        private fun updateObserver() {
-            //actualize GUI after successful location and API retrieval
-            WeatherAppViewModel.weather.observe(this) { weather ->
-
-                //actualize GUI
-                //TODO here you can actualize GUI of the app
-                //show the location
-                var loc = Locale("", weather.countryCode.toString())
-                //var loc = Locale("", "DK")
-                var countryName = loc.displayCountry
-                Log.i(null, countryName.toString())
-                var location_message = weather.cityName.toString() + ", " + countryName
-                if (countryName == "NULL") {
-                    location_message = weather.cityName.toString()
-                }
-
-                //Date update view
-                //val calendar: Calendar = Calendar.getInstance()
-                //val simpleDateFormat = SimpleDateFormat("EEEE, dd MMMM ")
-                //val dateTime = simpleDateFormat.format(calendar.time)
-
-                //Date update view
-                date_ID.text = weather.actualized.toString()
-
-                //Location update
-                Location_ID.text = location_message
-
-                //Temp update
-                temp_ID.text = weather.temperature.toString() + " ° "
-
-                //Humidity update
-                humidity_ID.text = weather.humidity.toString() + " % " + "\nHumidity"
-
-                //UV update
-                UV_ID.text = weather.uv.toString() + "\nUV-Index"
-
-                //Wind Update
-                wind_ID.text = weather.windSpeed.toString() + " km/h " + "\nWind"
-
-                //Description Update
-                description_ID.text = weather.weatherDescription.toString()
-
-                //Logo Update
-                when (weather.weatherCode?.toInt()) {
-                    202, 232 -> imageView.setImageResource(R.drawable.thunderstorm_heavy_rain)
-                    201, 231 -> imageView.setImageResource(R.drawable.thunderstorm_rain)
-                    200, 230 -> imageView.setImageResource(R.drawable.thunderstormlightrain)
-                    233 -> imageView.setImageResource(R.drawable.thunderstorm_hail)
-                    300, 301, 302, 500, 501, 502, 511, 520, 521, 522 -> imageView.setImageResource(R.drawable.rain)
-                    600 -> imageView.setImageResource(R.drawable.lightsnow)
-                    601, 602 -> imageView.setImageResource(R.drawable.snow)
-                    610 -> imageView.setImageResource(R.drawable.mixsnowandrain)
-                    611, 612 -> imageView.setImageResource(R.drawable.sleet)
-                    621, 622, 623 -> imageView.setImageResource(R.drawable.snowshower)
-                    700, 711, 721, 731, 741, 751 -> imageView.setImageResource(R.drawable.mist)
-                    800 -> imageView.setImageResource(R.drawable.clearsky)
-                    801, 802 -> imageView.setImageResource(R.drawable.fewclouds)
-                    803 -> imageView.setImageResource(R.drawable.brokenclouds)
-                    804 -> imageView.setImageResource(R.drawable.overcastclouds)
-                    else -> imageView.setImageResource(R.drawable.unknown)
-                }
-                //imageView.setImageResource()
-
-                //Update of textview and imageview
-                //call function here when its done
-
-
             }
         }
 
